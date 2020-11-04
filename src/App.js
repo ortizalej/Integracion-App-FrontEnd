@@ -1,19 +1,16 @@
-import logo from './logo.svg';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import ListUserComponent from "./user/ListUserComponent";
-import AddUserComponent from "./user/AddUserComponent";
-import EditUserComponent from "./user/EditUserComponent";
 import './App.css';
 import Admin from './pages/Administration'
+import SignIn from './pages/Sign-in'
+import Home from './pages/Home'
 function App() {
   return (
     <div className="App">
       <Router>
         <Switch>
-          <Route path="/" exact component={ListUserComponent} />
-          <Route path="/users" component={ListUserComponent} />
-          <Route path="/add-user" component={AddUserComponent} />
-          <Route path="/edit-user" component={EditUserComponent} />
+          <Route path="/" component={Home} />
+          <Route path="/sign-in" component={SignIn} />
+          <Route path="/admin" component={Admin} />
         </Switch>
       </Router>
     </div>
