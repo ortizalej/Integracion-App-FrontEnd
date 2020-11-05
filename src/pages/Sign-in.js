@@ -13,18 +13,6 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -57,7 +45,7 @@ export default function SignIn() {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign in
+          Iniciar Sesion
         </Typography>
         <form className={classes.form} noValidate>
           <TextField
@@ -66,8 +54,8 @@ export default function SignIn() {
             required
             fullWidth
             id="email"
-            label="Email Address"
-            name="email"
+            label="Correo Electronico"
+            name="Correo Electronico"
             autoComplete="email"
             autoFocus
           />
@@ -76,8 +64,8 @@ export default function SignIn() {
             margin="normal"
             required
             fullWidth
-            name="password"
-            label="Password"
+            name="Contraseña"
+            label="Contraseña"
             type="password"
             id="password"
             autoComplete="current-password"
@@ -110,7 +98,6 @@ export default function SignIn() {
         </form>
       </div>
       <Box mt={8}>
-        <Copyright />
       </Box>
     </Container>
   );
