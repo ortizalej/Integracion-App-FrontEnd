@@ -3,15 +3,16 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import logo from '../Images/Logo.png';
-import Select from '@material-ui/core/Select';
 import axios from 'axios';
 
 
@@ -35,9 +36,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn() {
-  function getUser() {
-    axios.get('https://market-api-uade.herokuapp.com/api/v1/Clients/{id}', {
+export default function SignUp() {
+  const classes = useStyles();
+  function createClient() {
+    axios.post('https://market-api-uade.herokuapp.com/api/v1/Clients/{id}', {
       headers: {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
@@ -46,27 +48,14 @@ export default function SignIn() {
     }
     ).then(response => console.log(response.data))
   }
-  const classes = useStyles();
-  const [state, setState] = React.useState({
-    age: '',
-    name: 'hai',
-  });
-  const handleChange = (event) => {
-    const name = event.target.name;
-    setState({
-      ...state,
-      [name]: event.target.value,
-    });
-  };
 
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
         <img src={logo} width="100" align="left" />
-
         <Typography component="h1" variant="h5">
-          Iniciar Sesion
+          Registrarse
         </Typography>
         <form className={classes.form} noValidate>
           <TextField
@@ -74,10 +63,10 @@ export default function SignIn() {
             margin="normal"
             required
             fullWidth
-            id="email"
-            label="Correo Electronico"
-            name="Correo Electronico"
-            autoComplete="email"
+            id="DNI"
+            label="DNI"
+            name="DNI"
+            autoComplete="DNI"
             autoFocus
           />
           <TextField
@@ -85,34 +74,63 @@ export default function SignIn() {
             margin="normal"
             required
             fullWidth
-            name="Contraseña"
-            label="Contraseña"
-            type="password"
             id="password"
-            autoComplete="current-password"
+            label="Contraseña"
+            name="Contraseña"
+            autoComplete="Contraseña"
+            autoFocus
+            type="password"
           />
-          <Select
-            native
-            value={state.age}
-            onChange={handleChange}
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
             fullWidth
-
-          >
-            <option aria-label="None" value="" />
-            <option value={10}>Administrator</option>
-            <option value={20}>Cliente</option>
-            <option value={30}>Empleado</option>
-          </Select>
+            name="Usuario"
+            label="Usuario"
+            type="text"
+            id="userName"
+          />
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="Correo Electronico"
+            label="Correo Electronico"
+            type="text"
+            id="Email"
+          />
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="Direccion"
+            label="Direccion"
+            type="text"
+            id="address"
+          />
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="Phone"
+            label="Phone"
+            type="phone"
+            id="Phone"
+          />
           <Button
             type="submit"
             fullWidth
             variant="contained"
             color="primary"
             className={classes.submit}
+            onClick={createClient()}
           >
-            Ingresar
+            Registrarse
           </Button>
-
         </form>
       </div>
       <Box mt={8}>

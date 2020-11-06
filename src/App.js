@@ -4,6 +4,8 @@ import Admin from './pages/Administration'
 import SignIn from './pages/Sign-in'
 import Home from './pages/Home'
 import SignUp from './pages/Sign-Up'
+import Checkout from './pages/Checkout'
+import Products from './pages/Product'
 
 function App() {
   return (
@@ -14,7 +16,8 @@ function App() {
           <Route path="/sign-in" component={SignIn} />
           <Route path="/sign-up" component={SignUp} />
           <Route path="/admin" component={Admin} />
-
+          <Route path="/checkout" component={Checkout} />
+          <Route path="/products" component={Products} />
         </Switch>
       </Router>
     </div>

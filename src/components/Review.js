@@ -40,7 +40,7 @@ export default function Review() {
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
-        Order summary
+        Detalle de la orden
       </Typography>
       <List disablePadding>
         {products.map((product) => (

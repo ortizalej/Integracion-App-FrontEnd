@@ -10,9 +10,9 @@ import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
-import AddressForm from './AddressForm';
-import PaymentForm from './PaymentForm';
-import Review from './Review';
+import AddressForm from '../components/AddressForm';
+import PaymentForm from '../components/PaymentForm';
+import Review from '../components/Review';
 
 function Copyright() {
   return (
@@ -64,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const steps = ['Shipping address', 'Payment details', 'Review your order'];
+const steps = ['Direccion de envio', 'Detalle de pago', 'Verifica tu orden'];
 
 function getStepContent(step) {
   switch (step) {
@@ -97,14 +97,14 @@ export default function Checkout() {
       <AppBar position="absolute" color="default" className={classes.appBar}>
         <Toolbar>
           <Typography variant="h6" color="inherit" noWrap>
-            Company name
+            Super En Casa
           </Typography>
         </Toolbar>
       </AppBar>
       <main className={classes.layout}>
         <Paper className={classes.paper}>
           <Typography component="h1" variant="h4" align="center">
-            Checkout
+            Pago
           </Typography>
           <Stepper activeStep={activeStep} className={classes.stepper}>
             {steps.map((label) => (
@@ -130,7 +130,7 @@ export default function Checkout() {
                 <div className={classes.buttons}>
                   {activeStep !== 0 && (
                     <Button onClick={handleBack} className={classes.button}>
-                      Back
+                      Atras
                     </Button>
                   )}
                   <Button
@@ -139,7 +139,7 @@ export default function Checkout() {
                     onClick={handleNext}
                     className={classes.button}
                   >
-                    {activeStep === steps.length - 1 ? 'Place order' : 'Next'}
+                    {activeStep === steps.length - 1 ? 'Confirmar Orden' : 'Siguiente'}
                   </Button>
                 </div>
               </React.Fragment>
