@@ -11,14 +11,12 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import logo from '../Images/Logo.png';
 import axios from 'axios';
 
 
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
-    display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
   },
@@ -27,12 +25,12 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
+    width: '100%',
+    heigth: '90%'
   },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
+//   submit: {
+//     margin: theme.spacing(3, 0, 2),
+//   },
 }));
 
 export default function SignUp() {
@@ -50,12 +48,11 @@ export default function SignUp() {
   }
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container >
       <CssBaseline />
       <div className={classes.paper}>
-        <img src={logo} width="100" align="left" />
         <Typography component="h1" variant="h5">
-          Registrarse
+          Producto
         </Typography>
         <form className={classes.form} noValidate>
           <TextField
@@ -63,10 +60,10 @@ export default function SignUp() {
             margin="normal"
             required
             fullWidth
-            id="DNI"
-            label="DNI"
-            name="DNI"
-            autoComplete="DNI"
+            id="name"
+            label="Nombre"
+            name="Nombre"
+            autoComplete="Nombre"
             autoFocus
           />
           <TextField
@@ -74,54 +71,73 @@ export default function SignUp() {
             margin="normal"
             required
             fullWidth
-            id="password"
-            label="Contraseña"
-            name="Contraseña"
-            autoComplete="Contraseña"
+            id="description"
+            label="Descripcion"
+            name="Descripcion"
+            autoComplete="Descripcion"
             autoFocus
-            type="password"
           />
           <TextField
             variant="outlined"
             margin="normal"
             required
             fullWidth
-            name="Usuario"
-            label="Usuario"
+            name="Marca"
+            label="Marca"
             type="text"
-            id="userName"
+            id="brand"
           />
           <TextField
             variant="outlined"
             margin="normal"
             required
             fullWidth
-            name="Correo Electronico"
-            label="Correo Electronico"
+            name="Categoria"
+            label="Categoria"
             type="text"
-            id="Email"
+            id="category"
           />
           <TextField
             variant="outlined"
             margin="normal"
             required
             fullWidth
-            name="Direccion"
-            label="Direccion"
-            type="text"
-            id="address"
+            name="Peso"
+            label="Peso"
+            type="number"
+            id="weight"
           />
           <TextField
             variant="outlined"
             margin="normal"
             required
             fullWidth
-            name="Phone"
-            label="Phone"
-            type="phone"
-            id="Phone"
+            name="Precio"
+            label="Precio"
+            type="number"
+            id="price"
           />
-          
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="Descuento"
+            label="Descuento"
+            type="number"
+            id="discountRate"
+          />              
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="Stock"
+            label="Stock"
+            type="number"
+            id="stock"
+          />
+                
           <Button
             type="submit"
             fullWidth
@@ -134,8 +150,6 @@ export default function SignUp() {
           </Button>
         </form>
       </div>
-      <Box mt={8}>
-      </Box>
     </Container>
   );
 }

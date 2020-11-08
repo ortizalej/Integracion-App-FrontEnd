@@ -1,11 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
@@ -34,7 +31,24 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(3, 0, 2),
   },
 }));
+function SignInRedirect(role) {
+  console.log(role)
+  if (role == 'admin') {
+    window.location.href = '/admin';
+  } else if (role == 'rrhh') {
+    window.location.href = '/users';
 
+  } else if (role == 'deposito') {
+    window.location.href = '/productsAdmin';
+
+  } else if (role == 'catalogador') {
+    window.location.href = '/productsAdmin';
+
+  } else if (role == 'despachante') {
+    window.location.href = '/sales';
+
+  }
+}
 export default function SignIn() {
   function getUser() {
     axios.get('https://market-api-uade.herokuapp.com/api/v1/Clients/{id}', {
@@ -47,18 +61,11 @@ export default function SignIn() {
     ).then(response => console.log(response.data))
   }
   const classes = useStyles();
-  const [state, setState] = React.useState({
-    age: '',
-    name: 'hai',
-  });
-  const handleChange = (event) => {
-    const name = event.target.name;
-    setState({
-      ...state,
-      [name]: event.target.value,
-    });
-  };
+  const [role, setRole] = React.useState('');
 
+  const handleChange = (event) => {
+    setRole(event.target.value);
+  };
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -93,22 +100,23 @@ export default function SignIn() {
           />
           <Select
             native
-            value={state.age}
+            value={role}
             onChange={handleChange}
             fullWidth
 
           >
             <option aria-label="None" value="" />
-            <option value={10}>Administrator</option>
-            <option value={20}>Cliente</option>
-            <option value={30}>Empleado</option>
+            <option value={'admin'}>Administracion</option>
+            <option value={'rrhh'}>Recursos Humanos</option>
+            <option value={'deposito'}>Encargado de Deposito</option>
+            <option value={'catagolador'}>Catagolador</option>
+            <option value={'despachante'}>Despachante</option>
           </Select>
           <Button
-            type="submit"
             fullWidth
             variant="contained"
             color="primary"
-            className={classes.submit}
+            onClick={() => { SignInRedirect(role) }}
           >
             Ingresar
           </Button>

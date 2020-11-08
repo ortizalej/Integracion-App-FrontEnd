@@ -6,6 +6,10 @@ import Home from './pages/Home'
 import SignUp from './pages/Sign-Up'
 import Checkout from './pages/Checkout'
 import Products from './pages/Product'
+import Users from './pages/Users'
+import Sales from './pages/Sales'
+import Facturation from './pages/Facturation'
+import ProductAdmin from './pages/ProductAdmin'
 
 function App() {
   return (
@@ -18,6 +22,12 @@ function App() {
           <Route path="/admin" component={Admin} />
           <Route path="/checkout" component={Checkout} />
           <Route path="/products" component={Products} />
+          <Route path="/users" component={Users} />
+          <Route path="/sales" component={Sales} />
+          <Route path="/facturation" component={Facturation} />
+          <Route path="/productAdmin" component={ProductAdmin} />
+          
+
         </Switch>
       </Router>
     </div>

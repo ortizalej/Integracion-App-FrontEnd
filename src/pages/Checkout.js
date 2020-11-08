@@ -64,15 +64,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const steps = ['Direccion de envio', 'Detalle de pago', 'Verifica tu orden'];
+const steps = ['Direccion de envio', 'Verifica tu orden'];
 
 function getStepContent(step) {
   switch (step) {
     case 0:
       return <AddressForm />;
     case 1:
-      return <PaymentForm />;
-    case 2:
       return <Review />;
     default:
       throw new Error('Unknown step');
@@ -104,7 +102,7 @@ export default function Checkout() {
       <main className={classes.layout}>
         <Paper className={classes.paper}>
           <Typography component="h1" variant="h4" align="center">
-            Pago
+            Datos de envio
           </Typography>
           <Stepper activeStep={activeStep} className={classes.stepper}>
             {steps.map((label) => (

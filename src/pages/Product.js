@@ -9,8 +9,7 @@ import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import Footer from '../components/Footer'
 import Header from '../components/Header'
-
-
+import ProductTable from '../components/Product'
 class Product extends Component {
 
     getProducts() {
@@ -61,8 +60,8 @@ class Product extends Component {
                     </div>
                     <Header />
                 </div>
-                <div>
-                    <Product />
+                <div style={{marginTop: 5,marginLeft: 20}}>
+                    <ProductTable />
                 </div>
                 <div>
                     <Footer />

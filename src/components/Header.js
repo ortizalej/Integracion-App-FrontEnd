@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import { BrowserRouter as Router, Link} from "react-router-dom";
+import { BrowserRouter as Router, Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -28,11 +28,15 @@ export default function Header() {
         <Toolbar>
           <Typography className={classes.title}>
           </Typography>
-          <Button color="inherit">Inicio</Button>
-          <Link to={{ pathname:'/products' }}>
+          <Link to={{ pathname: '/' }} style={{ textDecoration: 'none', color: 'white' }}>
+            <Button color="inherit">Inicio </Button>
+          </Link>
+          <Link to={{ pathname: '/products' }} style={{ textDecoration: 'none', color: 'white' }}>
             <Button color="inherit">Productos </Button>
           </Link>
-          <Button color="inherit">Ventas</Button>
+          <Link to={{ pathname: '/sign-in' }} style={{ textDecoration: 'none', color: 'white' }}>
+            <Button color="inherit">Ingresar </Button>
+          </Link>
         </Toolbar>
       </AppBar>
     </div>

@@ -10,14 +10,19 @@ import Title from './Title';
 import IconButton from '@material-ui/core/IconButton';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import IndeterminateCheckBoxIcon from '@material-ui/icons/IndeterminateCheckBox';
+import Checkbox from '@material-ui/core/Checkbox';
+
 // Generate Order Data
-function createData(id, name, price, stock, quantity) {
-    return { id, name, price, stock, quantity };
+function createData(id, salesNumber, totalPrice, methodPayment) {
+    return { id, salesNumber, totalPrice, methodPayment };
 }
 
 const rows = [
-    createData(0, 'Falopa', '1000', '3', '0'),
-    createData(1, 'Coca', '500', '3', '0'),
+    createData(0, '16 Mar, 2019', 'Elvis Presley', 'Tarjeta'),
+    createData(1, '16 Mar, 2019', 'Paul McCartney', 'Tarjeta'),
+    createData(2, '16 Mar, 2019', 'Tom Scholz', 'Tarjeta'),
+    createData(3, '16 Mar, 2019', 'Michael Jackson', 'Tarjeta'),
+    createData(4, '15 Mar, 2019', 'Bruce Springsteen', 'Tarjeta'),
 ];
 
 function preventDefault(event) {
@@ -30,36 +35,25 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function Product() {
+export default function SalesABM() {
     const classes = useStyles();
     return (
         <React.Fragment>
+            <Title>Facturas </Title>
             <Table size="small">
                 <TableHead>
                     <TableRow>
-                        <TableCell>Producto</TableCell>
-                        <TableCell>Precio</TableCell>
-                        <TableCell>Stock</TableCell>
-                        <TableCell>Cantidad</TableCell>
-                        <TableCell ></TableCell>
+                        <TableCell>Numero de Orden</TableCell>
+                        <TableCell>Precio Total</TableCell>
+                        <TableCell>Medio de Pago</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
                     {rows.map((row) => (
                         <TableRow key={row.id}>
-                            <TableCell>{row.name}</TableCell>
-                            <TableCell>{row.price}</TableCell>
-                            <TableCell>{row.quantity}</TableCell>
-                            <TableCell>{row.stock}</TableCell>
-
-                            <TableCell>
-                                <IconButton color="primary" aria-label="upload picture" component="span">
-                                    <AddCircleIcon />
-                                </IconButton>
-                                <IconButton color="primary" aria-label="upload picture" component="span">
-                                    <IndeterminateCheckBoxIcon />
-                                </IconButton>
-                            </TableCell>
+                            <TableCell>{row.salesNumber}</TableCell>
+                            <TableCell>{row.totalPrice}</TableCell>
+                            <TableCell>{row.methodPayment}</TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
