@@ -1,7 +1,7 @@
 import React from 'react';
-import Atention_Logo from '../Images/Atencion_Cliente.png'
-import Email from '../Images/Email.png'
-import Phone from '../Images/Phone.png'
+import Atention_Logo from '../../Images/Atencion_Cliente.png'
+import Email from '../../Images/Email.png'
+import Phone from '../../Images/Phone.png'
 var style = {
     backgroundColor: "#F8F8F8",
     borderTop: "1px solid #E7E7E7",

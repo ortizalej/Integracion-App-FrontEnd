@@ -1,33 +1,33 @@
 import React from 'react';
+import Link from '@material-ui/core/Link';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Title from './Title';
+import Title from '../Title';
 import Button from '@material-ui/core/Button';
+import UserForm from '../Forms/UserForm'
 import Modal from '@material-ui/core/Modal';
 import Fade from '@material-ui/core/Fade';
 import Backdrop from '@material-ui/core/Backdrop';
-import AddProducts from './Forms/Product'
 // Generate Order Data
-function createData(id, name, price, stock) {
-    return { id, name, price, stock };
+function createData(id, name, role) {
+    return { id, name, role, };
 }
 
 const rows = [
-    createData(0, '16 Mar, 2019', 'Elvis Presley', '1'),
-    createData(1, '16 Mar, 2019', 'Paul McCartney', '1'),
-    createData(2, '16 Mar, 2019', 'Tom Scholz', '1'),
-    createData(3, '16 Mar, 2019', 'Michael Jackson', '1'),
-    createData(4, '15 Mar, 2019', 'Bruce Springsteen', '1'),
+    createData(0, '16 Mar, 2019', 'Elvis Presley'),
+    createData(1, '16 Mar, 2019', 'Paul McCartney'),
+    createData(2, '16 Mar, 2019', 'Tom Scholz'),
+    createData(3, '16 Mar, 2019', 'Michael Jackson'),
+    createData(4, '15 Mar, 2019', 'Bruce Springsteen'),
 ];
 
 function preventDefault(event) {
     event.preventDefault();
 }
-
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -66,16 +66,15 @@ export default function ClientABM() {
     };
     return (
         <React.Fragment>
-            <Title>Products</Title>
+            <Title>Usuarios</Title>
             <Button variant="outlined" size="small" color="primary" onClick={handleOpen} >
-                Nuevo Producto
+                Nuevo Usuario
             </Button>
             <Table size="small">
                 <TableHead>
                     <TableRow>
                         <TableCell>Nombre</TableCell>
-                        <TableCell>Precio</TableCell>
-                        <TableCell>Stock</TableCell>
+                        <TableCell>Rol</TableCell>
                         <TableCell></TableCell>
                     </TableRow>
                 </TableHead>
@@ -83,13 +82,12 @@ export default function ClientABM() {
                     {rows.map((row) => (
                         <TableRow key={row.id}>
                             <TableCell>{row.name}</TableCell>
-                            <TableCell>{row.price}</TableCell>
-                            <TableCell>{row.stock}</TableCell>
+                            <TableCell>{row.role}</TableCell>
                             <TableCell>
-                                <Button variant="outlined" size="small" color="primary" >
+                                <Button variant="outlined" size="small" color="primary" onClick={handleOpen}>
                                     Editar
                                 </Button>
-                                <Button variant="outlined" size="small" color="primary">
+                                <Button variant="outlined" size="small" color="primary" onClick={handleOpen}>
                                     Eliminar
                                 </Button>
                             </TableCell>
@@ -110,8 +108,8 @@ export default function ClientABM() {
                 }}
             >
                 <Fade in={open}>
-                    <div className={classes.paper}> 
-                        <AddProducts />
+                    <div className={classes.paper}>
+                        <UserForm />
                     </div>
                 </Fade>
             </Modal>

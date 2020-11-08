@@ -17,8 +17,8 @@ import Paper from '@material-ui/core/Paper';
 import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import { RRHHListItems } from '../components/listItems';
-import UsersABM from '../components/UsersABM';
+import { RRHHListItems } from '../components/Forms/listItems';
+import UsersABM from '../components/User/UsersABM';
 
 function Copyright() {
   return (

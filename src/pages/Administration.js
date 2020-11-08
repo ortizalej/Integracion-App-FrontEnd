@@ -18,10 +18,9 @@ import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import { mainListItems } from '../components/listItems';
-import Chart from '../components/Chart';
-import Deposits from '../components/Deposits';
-import Orders from '../components/Orders';
+import { mainListItems } from '../components/Forms/listItems';
+import Chart from '../components/Admin/Chart';
+import Orders from '../components/Sales/Orders';
 
 function Copyright() {
   return (

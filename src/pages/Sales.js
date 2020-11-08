@@ -17,8 +17,8 @@ import Paper from '@material-ui/core/Paper';
 import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import { adminListItems } from '../components/listItems';
-import SalesABM from '../components/SalesABM';
+import { adminListItems } from '../components/Forms/listItems';
+import SalesABM from '../components/Sales/SalesABM';
 
 function Copyright() {
   return (

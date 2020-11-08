@@ -7,9 +7,9 @@ import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
-import Footer from '../components/Footer'
-import Header from '../components/Header'
-import ProductTable from '../components/Product'
+import Footer from '../components/General/Footer'
+import Header from '../components/General/Header'
+import ProductTable from '../components/Products/Product'
 class Product extends Component {
 
     getProducts() {

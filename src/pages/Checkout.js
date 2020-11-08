@@ -10,9 +10,8 @@ import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
-import AddressForm from '../components/AddressForm';
-import PaymentForm from '../components/PaymentForm';
-import Review from '../components/Review';
+import AddressForm from '../components/Checkouts/AddressForm';
+import Review from '../components/Checkouts/Review';
 
 function Copyright() {
   return (

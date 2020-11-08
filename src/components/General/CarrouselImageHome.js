@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Carousel from './Carrousel';
-import { SLIDE_INFO } from '../constant/contstants';
+import { SLIDE_INFO } from '../../constant/contstants';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import Slide from '@material-ui/core/Slide';
 
