@@ -32,23 +32,53 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function UserForm() {
+export default function UserForm(data) {
+    console.log(data.action)
     const classes = useStyles();
     const [role, setRole] = React.useState('');
+    const [sex, setSex] = React.useState('');
 
     const handleChange = (event) => {
         setRole(event.target.value);
     };
-    function createClient() {
-        axios.post('https://market-api-uade.herokuapp.com/api/v1/Clients/{id}', {
-            headers: {
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
-                'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token'
-            }
+    const handleChangeSex = (event) => {
+        setSex(event.target.value);
+    };
+
+    function actionClient(action) {
+        let DNI = document.getElementById('DNI').value
+        let password = document.getElementById('Password').value
+        let userName = document.getElementById('UserName').value
+        let email = document.getElementById('Email').value
+        let address = document.getElementById('Address').value
+        let phone = document.getElementById('Phone').value
+        let role = document.getElementById('Role').value
+        let sex = document.getElementById('Phone').value
+        let zipCode = document.getElementById('Role').value
+        let body ={
+            "id": DNI,
+            "Name": userName,
+            "LastName": userName,
+            "Sex": sex,
+            "EmailAddress": email,
+            "Password": password,
+            "Address": address,
+            "ZipCode": zipCode,
+            "Phone": phone,
+            "Role": role
         }
-        ).then(response => console.log(response.data))
+        console.log(body)
+
+        // axios.post('https://market-api-uade.herokuapp.com/api/v1/Clients/{id}', body,{
+        //     headers: {
+        //         'Access-Control-Allow-Origin': '*',
+        //         'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
+        //         'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token'
+        //     }
+        // }
+        // ).then(response => console.log(response.data))
     }
+
 
     return (
         <Container component="main" maxWidth="xs">
@@ -79,7 +109,7 @@ export default function UserForm() {
                         name="Contraseña"
                         autoComplete="Contraseña"
                         autoFocus
-                        type="password"
+                        type="Password"
                     />
                     <TextField
                         variant="outlined"
@@ -89,8 +119,20 @@ export default function UserForm() {
                         name="Usuario"
                         label="Usuario"
                         type="text"
-                        id="userName"
+                        id="UserName"
                     />
+                    <Select
+                        native
+                        value={sex}
+                        onChange={handleChangeSex}
+                        fullWidth
+                        id="sex"
+
+                    >
+                        <option aria-label="None" value="" > Sexo</option>
+                        <option value={'H'}>Hombre</option>
+                        <option value={'M'}>Mujer</option>
+                    </Select>
                     <TextField
                         variant="outlined"
                         margin="normal"
@@ -109,7 +151,17 @@ export default function UserForm() {
                         name="Direccion"
                         label="Direccion"
                         type="text"
-                        id="address"
+                        id="Address"
+                    />
+                    <TextField
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        name="Zip Code"
+                        label="Zip Code"
+                        type="text"
+                        id="ZipCode"
                     />
                     <TextField
                         variant="outlined"
@@ -126,9 +178,10 @@ export default function UserForm() {
                         value={role}
                         onChange={handleChange}
                         fullWidth
+                        id="Role"
 
                     >
-                        <option aria-label="None" value="" />
+                        <option aria-label="None" value="" > Rol</option>
                         <option value={'admin'}>Administracion</option>
                         <option value={'rrhh'}>Recursos Humanos</option>
                         <option value={'deposito'}>Encargado de Deposito</option>
@@ -136,19 +189,16 @@ export default function UserForm() {
                         <option value={'despachante'}>Despachante</option>
                     </Select>
                     <Button
-                        type="submit"
                         fullWidth
                         variant="contained"
                         color="primary"
                         className={classes.submit}
-                        onClick={createClient()}
+                        onClick={() => { actionClient() }}
                     >
                         Confirmar
           </Button>
                 </form>
             </div>
-            <Box mt={8}>
-            </Box>
         </Container>
     );
 }
