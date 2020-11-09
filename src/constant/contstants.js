@@ -4,7 +4,7 @@ export const SLIDE_INFO = [
                                                     pictureUrl3: "https://static.cotodigital3.com.ar/sitios/fotos/full/00172400/00172423.jpg"},
     { backgroundColor: '#ffb6b9', title: 'Slide 2', pictureUrl: "https://static.cotodigital3.com.ar/sitios/fotos/full/00041700/00041773.jpg", 
                                                     pictureUrl2: "https://static.cotodigital3.com.ar/sitios/fotos/full/00125800/00125848.jpg",
-                                                    pictureUrl3: "" },
+                                                    pictureUrl3: "https://static.cotodigital3.com.ar/sitios/fotos/full/00251400/00251435.jpg" },
     { backgroundColor: '#8deaff', title: 'Slide 3', pictureUrl: "https://static.cotodigital3.com.ar/sitios/fotos/full/00118300/00118371.jpg", 
                                                     pictureUrl2: "https://static.cotodigital3.com.ar/sitios/fotos/full/00254000/00254078_g01.jpg",
                                                     pictureUrl3: "https://static.cotodigital3.com.ar/sitios/fotos/full/00281900/00281957.jpg"},
