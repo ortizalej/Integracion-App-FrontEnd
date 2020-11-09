@@ -34,9 +34,6 @@ class Home extends Component {
                 <div style={{ marginTop: 60 }} >
                     <div>
                         <img src={logo} width="100" align="left" />
-
-                        <img src={Items_Car} width="100" align="right" />
-
                     </div>
                     <div>
                         <Paper component="form" style={{

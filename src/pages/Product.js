@@ -11,9 +11,14 @@ import Footer from '../components/General/Footer'
 import Header from '../components/General/Header'
 import ProductTable from '../components/Products/Product'
 class Product extends Component {
-
+    constructor(props) {
+        super(props);
+        this.state = {
+            products: null
+        };
+      }
     getProducts() {
-        var auth = btoa('admin1234');
+        var auth = btoa('admin:123');
         axios.get('https://market-api-uade.herokuapp.com/api/v1/Products/get-all', {
             headers: {
                 'Access-Control-Allow-Origin': '*',
@@ -22,11 +27,15 @@ class Product extends Component {
                 'Authorization': 'Basic ' + auth
             }
         }
-        ).then(response => console.log(response.data))
+        ).then(response => {
+            this.setState({
+                products : response.data
+            })
+        })
     }
 
     render() {
-        this.getProducts()
+        this.getProducts();
         return (
             <div>
 
@@ -61,7 +70,7 @@ class Product extends Component {
                     <Header />
                 </div>
                 <div style={{marginTop: 5,marginLeft: 20}}>
-                    <ProductTable />
+                    <ProductTable products={this.state.products} />
                 </div>
                 <div>
                     <Footer />
