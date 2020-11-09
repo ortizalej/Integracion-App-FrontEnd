@@ -105,7 +105,7 @@ export default function SignIn() {
             fullWidth
 
           >
-            <option aria-label="None" value="" />
+            <option aria-label="None" value="" > Selecciona un rol</option>
             <option value={'admin'}>Administracion</option>
             <option value={'rrhh'}>Recursos Humanos</option>
             <option value={'deposito'}>Encargado de Deposito</option>
