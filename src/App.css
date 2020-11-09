@@ -124,6 +124,18 @@ textarea::placeholder {
   color: #61dafb;
 }
 
+.Carousel {
+  text-align: center;
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+  margin-left: 2rem;
+  margin-right: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
 
 @keyframes App-logo-spin {
   from {

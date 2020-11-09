@@ -3,6 +3,7 @@ import Carousel from './Carrousel';
 import { SLIDE_INFO } from '../../constant/contstants';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import Slide from '@material-ui/core/Slide';
+import '../../App.css';
 
 function Arrow(props) {
     const { direction, clickFunction } = props;
@@ -50,28 +51,26 @@ function CarrouselImageHome() {
         };
     });
     return (
-        <div class="container">
+        <div >
 
-            <div className='row'>
-                <div >
+            <div className='Carousel'>
+                
                     <Arrow
                         direction='left'
                         clickFunction={() => onArrowClick('left')}
                     />
-                </div >
-                <div className='col-sm'>
+                
                     <Slide in={slideIn} direction={slideDirection}>
                         <div>
                             <Carousel content={content} />
                         </div>
                     </Slide>
-                </div>
-                <div className='col-sm'>
+                
                     <Arrow
                         direction='right'
                         clickFunction={() => onArrowClick('right')}
                     />
-                </div>
+                
             </div>
         </div>
     );
