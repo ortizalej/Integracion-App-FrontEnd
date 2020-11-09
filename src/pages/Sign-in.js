@@ -8,8 +8,8 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import logo from '../Images/Logo.png';
-import Select from '@material-ui/core/Select';
 import axios from 'axios';
+import { Redirect } from "react-router-dom"
 
 
 const useStyles = makeStyles((theme) => ({
@@ -31,41 +31,89 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(3, 0, 2),
   },
 }));
-function SignInRedirect(role) {
-  console.log(role)
-  if (role == 'admin') {
-    window.location.href = '/admin';
-  } else if (role == 'rrhh') {
-    window.location.href = '/users';
 
-  } else if (role == 'deposito') {
-    window.location.href = '/productsAdmin';
+function SignInRedirect(user) {
+  let path;
 
-  } else if (role == 'catalogador') {
-    window.location.href = '/productsAdmin';
-
-  } else if (role == 'despachante') {
-    window.location.href = '/sales';
-
+  switch (user.role) {
+    case 0: // Client
+      path = "../"
+      break;
+    case 1: // Admin
+      path = "../admin"
+      break;
+    case 2: // RR.HH.
+      path = "/users"
+      break;
+    case 3: // Encargado de depósito
+      path = "/productsAdmin"
+      break;
+    case 4: // Catalogador
+      path = "/productsAdmin"
+      break;
+    case 5: // Despachante
+      path = "/sales"
+      break;
   }
+
+  console.log(path);
+  return <Redirect to="www.google.com" />
 }
+
 export default function SignIn() {
-  function getUser() {
-    axios.get('https://market-api-uade.herokuapp.com/api/v1/Clients/{id}', {
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
-        'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token'
+  async function getUser(emailAddress, password) {
+    let resp;
+    var auth = btoa('admin:123');
+    try {
+      let url = 'https://market-api-uade.herokuapp.com/api/v1/Clients/get-by-email-and-password?emailAddress=' + emailAddress + '&password=' + password;
+      await axios.get(url, {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
+          'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token',
+          'Authorization': 'Basic ' + auth
+        }
+      }
+      ).then(response => {
+        resp = response.data;
+      })
+    }
+    catch {
+      if (resp === undefined) {
+        let url2 = 'https://market-api-uade.herokuapp.com/api/v1/Employees/get-by-email-and-password?emailAddress=' + emailAddress + '&password=' + password;
+        await axios.get(url2, {
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
+            'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token',
+            'Authorization': 'Basic ' + auth
+          }
+        }
+        ).then(response => {
+          resp = response.data;
+          if (resp === undefined) {
+            console.log("El usuario no existe.")
+          }
+        })
       }
     }
-    ).then(response => console.log(response.data))
-  }
-  const classes = useStyles();
-  const [role, setRole] = React.useState('');
 
-  const handleChange = (event) => {
-    setRole(event.target.value);
-  };
+    return resp;
+  }
+
+  async function validateUser() {
+    let emailAddress = document.getElementById("email").value;
+    let password = document.getElementById("password").value;
+
+    var user = await getUser(emailAddress, password);
+    SignInRedirect(user)
+  }
+
+  const classes = useStyles();
+  // const [role, setRole] = React.useState('');
+  // const handleChange = (event) => {
+  //   setRole(event.target.value);
+  // };
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -98,25 +146,24 @@ export default function SignIn() {
             id="password"
             autoComplete="current-password"
           />
-          <Select
+          {/* <Select
             native
             value={role}
             onChange={handleChange}
             fullWidth
-
           >
-            <option aria-label="None" value="" > Selecciona un rol</option>
+            <option aria-label="None" value="" />
             <option value={'admin'}>Administracion</option>
             <option value={'rrhh'}>Recursos Humanos</option>
             <option value={'deposito'}>Encargado de Deposito</option>
             <option value={'catagolador'}>Catagolador</option>
             <option value={'despachante'}>Despachante</option>
-          </Select>
+          </Select> */}
           <Button
             fullWidth
             variant="contained"
             color="primary"
-            onClick={() => { SignInRedirect(role) }}
+            onClick={validateUser}
           >
             Ingresar
           </Button>
