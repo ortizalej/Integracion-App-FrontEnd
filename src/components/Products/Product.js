@@ -32,7 +32,10 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Product(data) {
     console.log('DATA LLEGADA',data.products)
-
+    let products = data.products
+    if(!data && !data.products) {
+        products = [{}]
+    }
     const classes = useStyles();
     return (
         <React.Fragment>
@@ -40,14 +43,16 @@ export default function Product(data) {
                 <TableHead>
                     <TableRow>
                         <TableCell>Producto</TableCell>
+                        <TableCell>Descripcion</TableCell>
                         <TableCell>Precio</TableCell>
                         <TableCell>Cantidad</TableCell>
                         <TableCell ></TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {data.products.map((row) => (
+                    {products.map((row) => (
                         <TableRow key={row.id}>
+                            <TableCell>{row.productName}</TableCell>
                             <TableCell>{row.description}</TableCell>
                             <TableCell>{row.price}</TableCell>
                             <TableCell>{row.stock}</TableCell>
