@@ -197,6 +197,8 @@ class UserForm extends Component {
         }
         const auth = btoa('admin:123');
         if (action == 'new') {
+            console.log('BODY',body)
+
             axios.post('https://market-api-uade.herokuapp.com/api/v1/Employees/create', body, {
                 headers: {
                     'Access-Control-Allow-Origin': '*',
@@ -206,7 +208,7 @@ class UserForm extends Component {
 
                 }
             }
-            ).then(response => console.log(response.data))
+            ).then(response => this.props.updateEmployeesList(body, 'new'))
         } else if (action == 'edit') {
             console.log('BODY',body)
 
@@ -242,7 +244,7 @@ class UserForm extends Component {
                             autoComplete="DNI"
                             autoFocus
                             value={this.state.DNI}
-                            onChange={this.shandleChangeDni}
+                            onChange={this.handleChangeDni}
 
                         />
                         <TextField

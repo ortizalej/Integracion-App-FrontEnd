@@ -17,7 +17,7 @@ import Paper from '@material-ui/core/Paper';
 import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import { RRHHListItems } from '../components/Forms/listItems';
+import { mainListItems } from '../components/Forms/listItems';
 import UsersABM from '../components/User/UsersABM';
 import axios from 'axios';
 const drawerWidth = 240;
@@ -104,7 +104,7 @@ class Users extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      open: false,
+      open: true,
       employees: []
     };
   }
@@ -174,7 +174,7 @@ class Users extends Component {
             </IconButton>
           </div>
           <Divider />
-          <List>{RRHHListItems}</List>
+          <List>{mainListItems}</List>
           <Divider />
         </Drawer>
         <main className={classes.content}>

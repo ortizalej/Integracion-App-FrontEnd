@@ -54,7 +54,7 @@ class Header extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: null,
+      user: {},
       products: []
 
     };
@@ -76,7 +76,12 @@ class Header extends Component {
   };
   render() {
     const { classes } = this.props;
-
+    if(this.props.user != null && !this.state.user) {
+      this.setState({
+        user: this.props.user
+      })
+    }
+    console.log(this.props.user)
     return (
       <div className={classes.root}>
         <AppBar position="static">
@@ -89,9 +94,15 @@ class Header extends Component {
             <Link to={{ pathname: '/products' }} style={{ textDecoration: 'none', color: 'white' }}>
               <Button color="inherit">Productos </Button>
             </Link>
-            <Link to={{ pathname: '/sign-in' }} style={{ textDecoration: 'none', color: 'white' }}>
-              <Button color="inherit">Ingresar </Button>
-            </Link>
+            {this.state.user.userName == null ?
+
+              <Link to={{ pathname: '/sign-in' }} style={{ textDecoration: 'none', color: 'white' }}>
+                <Button color="inherit">Ingresar </Button>
+              </Link>
+              :
+                <Button color="inherit">{this.state.user.userName} </Button>
+
+            }
             <IconButton aria-label="cart" onClick={this.handleOpen}>
               <StyledBadge badgeContent={this.state.products.length} color="secondary">
                 <ShoppingCartIcon />

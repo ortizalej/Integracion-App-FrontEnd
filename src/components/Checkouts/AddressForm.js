@@ -2,12 +2,13 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
+import Select from '@material-ui/core/Select';
 
 export default function AddressForm() {
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
-        Direccion de envio
+        Datos de envio
       </Typography>
       <Grid container spacing={3}>
         <Grid item xs={12} sm={6}>
@@ -60,7 +61,7 @@ export default function AddressForm() {
           />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <TextField id="state" name="state" label="State/Province/Region" fullWidth />
+          <TextField id="province" name="Provincia" label="Provincia" fullWidth />
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
@@ -73,14 +74,18 @@ export default function AddressForm() {
           />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="country"
-            name="Pais"
-            label="Pais"
+          <Select
+            native
+
             fullWidth
-            autoComplete="shipping country"
-          />
+            id="methodPayment"
+
+          >
+            <option aria-label="None" value="" > Medio de Pago</option>
+            <option value={'1'}>Efectivo</option>
+            <option value={'2'}>Tarjeta Debito</option>
+            <option value={'3'}>Tarjeta Credito</option>
+          </Select>
         </Grid>
       </Grid>
     </React.Fragment>

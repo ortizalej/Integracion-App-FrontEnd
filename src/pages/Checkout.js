@@ -63,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const steps = ['Direccion de envio', 'Verifica tu orden'];
+const steps = ['Datos de envio', 'Verifica tu orden'];
 
 function getStepContent(step) {
   switch (step) {

@@ -146,7 +146,7 @@ class UsersABM extends Component {
                     <TableHead>
                         <TableRow>
                             <TableCell>Nombre</TableCell>
-                            <TableCell>Rol</TableCell>
+                            <TableCell>Apellido</TableCell>
                             <TableCell></TableCell>
                         </TableRow>
                     </TableHead>
@@ -154,7 +154,7 @@ class UsersABM extends Component {
                         {this.state.employees.map((row) => (
                             <TableRow key={row.id}>
                                 <TableCell>{row.userName}</TableCell>
-                                <TableCell>{row.role}</TableCell>
+                                <TableCell>{row.lastName}</TableCell>
                                 <TableCell>
                                     <Button variant="outlined" size="small" color="primary" onClick={() => { this.handleOpen(row, 'edit') }}>
                                         Editar

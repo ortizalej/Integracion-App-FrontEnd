@@ -50,7 +50,7 @@ class ProductABM extends Component {
         this.state = {
             open: false,
             product: [],
-            selectedProduct: null,
+            selectedProduct: {},
             action: null,
             init: true
         };

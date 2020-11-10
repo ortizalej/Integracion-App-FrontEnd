@@ -12,7 +12,7 @@ import LayersIcon from '@material-ui/icons/Layers';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import { BrowserRouter as Router, Link } from "react-router-dom";
 
-export const mainListItems = (
+export const mainListItems =(
   <div>
     <Link to={{ pathname: '/admin' }} style={{ textDecoration: 'none', color: 'black' }}>
 
@@ -20,7 +20,7 @@ export const mainListItems = (
         <ListItemIcon>
           <DashboardIcon />
         </ListItemIcon>
-        <ListItemText primary="Dashboard" />
+        <ListItemText primary="Ordenes de compra" />
       </ListItem>
     </Link>
     <Link to={{ pathname: '/sales' }} style={{ textDecoration: 'none', color: 'black' }}>
@@ -28,7 +28,7 @@ export const mainListItems = (
         <ListItemIcon>
           <ShoppingCartIcon />
         </ListItemIcon>
-        <ListItemText primary="Ordenes" />
+        <ListItemText primary="Despachador" />
       </ListItem>
     </Link>
     <Link to={{ pathname: '/users' }} style={{ textDecoration: 'none', color: 'black' }}>
@@ -46,6 +46,15 @@ export const mainListItems = (
           <LayersIcon />
         </ListItemIcon>
         <ListItemText primary="Facturacion" />
+      </ListItem>
+    </Link>
+    <Link to={{ pathname: '/productAdmin' }} style={{ textDecoration: 'none', color: 'black' }}>
+
+      <ListItem button>
+        <ListItemIcon>
+          <LayersIcon />
+        </ListItemIcon>
+        <ListItemText primary="Admin. Productos" />
       </ListItem>
     </Link>
   </div>

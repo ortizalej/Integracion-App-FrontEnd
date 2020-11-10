@@ -16,7 +16,7 @@ import Paper from '@material-ui/core/Paper';
 import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import { adminListItems } from '../components/Forms/listItems';
+import { mainListItems } from '../components/Forms/listItems';
 import FacturationTabs from '../components/Facturation/FacturationTabs';
 
 function Copyright() {
@@ -157,7 +157,7 @@ export default function Dashboard() {
           </IconButton>
         </div>
         <Divider />
-        <List>{adminListItems}</List>
+        <List>{mainListItems}</List>
         <Divider />
       </Drawer>
       <main className={classes.content}>

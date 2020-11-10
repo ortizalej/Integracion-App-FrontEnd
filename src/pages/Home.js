@@ -5,12 +5,13 @@ import logo from '../Images/Logo.png';
 import Footer from '../components/General/Footer'
 import Header from '../components/General/Header'
 import CarouselSlide from '../components/General/CarrouselImageHome';
-
+import moment from 'moment'
 class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
             user: {},
+            login: false
 
         };
     }
@@ -28,7 +29,14 @@ class Home extends Component {
     }
 
     render() {
-
+        if (this.props.location.state != null && !this.state.login) {
+            console.log(this.props.location.state.user)
+            this.setState({
+                user : this.props.location.state.user,
+                login: true
+            })
+        }
+        
         return (
             <div>
 
@@ -36,9 +44,9 @@ class Home extends Component {
                     <div>
                         <img src={logo} width="100" align="left" />
                     </div>
-                    <Header user ={this.state.user}/>
+                    <Header user={this.state.user} />
                 </div>
-                <CarouselSlide/>
+                <CarouselSlide />
                 <div>
                     <Footer />
                 </div>

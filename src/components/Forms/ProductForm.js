@@ -8,8 +8,6 @@ import Container from '@material-ui/core/Container';
 import axios from 'axios';
 import React, { Component } from 'react';
 
-
-
 const classes = theme => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -24,9 +22,6 @@ const classes = theme => ({
     width: '100%',
     heigth: '90%'
   },
-  //   submit: {
-  //     margin: theme.spacing(3, 0, 2),
-  //   },
 });
 class ProductForm extends Component {
   constructor(props) {
