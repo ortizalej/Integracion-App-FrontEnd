@@ -22,7 +22,7 @@ class Home extends Component {
     }
 
     render() {
-        this.getProducts()
+        console.log(this.props.location.state.user)
         return (
             <div>
 

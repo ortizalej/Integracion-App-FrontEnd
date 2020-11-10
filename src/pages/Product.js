@@ -18,7 +18,9 @@ class Product extends Component {
         this.state = {
             masterProducts: [],
             productsToShow: [],
-            searchValue: null
+            searchValue: null,
+            init: true
+
         };
     }
 
@@ -27,7 +29,7 @@ class Product extends Component {
         let filterProducts = this.state.masterProducts.filter(item => item.productName.toLowerCase().indexOf(term) > -1);
         this.setState({
             productsToShow: filterProducts,
-            search: true
+            search: true,
         })
     }
     getProducts() {
@@ -44,14 +46,15 @@ class Product extends Component {
             console.log('RESPONSE', response)
             this.setState({
                 masterProducts: response.data,
-                productsToShow: response.data
+                productsToShow: response.data,
+                init: false
             })
         })
     }
 
 
     render() {
-        if (this.state.masterProducts.length == 0) {
+        if (this.state.init) {
             this.getProducts();
         }
         const onChange = (event) => {

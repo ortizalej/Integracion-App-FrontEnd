@@ -113,7 +113,7 @@ class ProductForm extends Component {
     }
     const auth = btoa('admin:123');
     if (action == 'new') {
-      let url ='https://market-api-uade.herokuapp.com​/api​/v1​/Products​/create'
+      let url ='https://market-api-uade.herokuapp.com/api/v1/Products/create'
       console.log(url)
       axios.post(url, body, {
         headers: {
