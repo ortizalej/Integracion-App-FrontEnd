@@ -38,15 +38,71 @@ const useStyles = makeStyles((theme) => ({
 export default function SignUp() {
   const classes = useStyles();
 
-  function createClient() {
-    axios.post('https://market-api-uade.herokuapp.com/api/v1/Clients/{id}', {
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
-        'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token'
-      }
+  async function createClient() {
+    let dni = document.getElementById("DNI").value;
+    let userName = document.getElementById("userName").value;
+    let lastName = document.getElementById("lastName").value;
+    let emailAddress = document.getElementById("emailAddress").value;
+    let password = document.getElementById("password").value;
+    let address = document.getElementById("address").value;
+    let phone = document.getElementById("phone").value;
+    let zipCode = document.getElementById("zipCode").value;
+
+    let user = {
+      "id": dni,
+      "userName": userName,
+      "lastName": lastName,
+      "sex": "H",
+      "birthDate": "1990-10-08T00:00:00.000Z",
+      "emailAddress": emailAddress,
+      "password": password,
+      "address": address,
+      "zipCode": zipCode,
+      "phone": phone,
+      "role": 0
     }
-    ).then(response => console.log(response.data))
+
+    let resp = await validateExistingUser(user.id);
+
+    if (resp === undefined) { createUser(user); }
+    else { console.log("El cliente ya existe"); }
+
+    // Redirect to sign in
+  }
+
+  async function validateExistingUser(dni) {
+    let resp;
+    var auth = btoa('admin:123');
+    try {
+      let url = 'https://market-api-uade.herokuapp.com/api/v1/Clients/' + dni;
+      await axios.get(url, {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
+          'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token',
+          'Authorization': 'Basic ' + auth
+        }
+      }
+      ).then(response => {
+        resp = response.data;
+      })
+    }
+    catch {}
+
+    return resp;
+  }
+
+  async function createUser(user) {
+    var auth = btoa('admin:123');
+      await axios.post('https://market-api-uade.herokuapp.com/api/v1/Clients/create', user, {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
+          'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token',
+          'Authorization': 'Basic ' + auth
+        }
+      }
+      ).then(response => console.log("El cliente ha sido creado: ", response.data))
   }
 
   return (
@@ -74,22 +130,20 @@ export default function SignUp() {
             margin="normal"
             required
             fullWidth
-            id="password"
-            label="Contraseña"
-            name="Contraseña"
-            autoComplete="Contraseña"
-            autoFocus
-            type="password"
+            name="Nombre"
+            label="Nombre"
+            type="text"
+            id="userName"
           />
           <TextField
             variant="outlined"
             margin="normal"
             required
             fullWidth
-            name="Usuario"
-            label="Usuario"
+            name="Apellido"
+            label="Apellido"
             type="text"
-            id="userName"
+            id="lastName"
           />
           <TextField
             variant="outlined"
@@ -99,7 +153,19 @@ export default function SignUp() {
             name="Correo Electronico"
             label="Correo Electronico"
             type="text"
-            id="Email"
+            id="emailAddress"
+          />
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            id="password"
+            label="Contraseña"
+            name="Contraseña"
+            autoComplete="Contraseña"
+            autoFocus
+            type="password"
           />
           <TextField
             variant="outlined"
@@ -119,16 +185,23 @@ export default function SignUp() {
             name="Phone"
             label="Phone"
             type="phone"
-            id="Phone"
+            id="phone"
           />
-          
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="Código Postal"
+            label="Código Postal"
+            type="string"
+            id="zipCode"
+          />
           <Button
-            type="submit"
             fullWidth
             variant="contained"
             color="primary"
-            className={classes.submit}
-            onClick={createClient()}
+            onClick={createClient}
           >
             Registrarse
           </Button>
