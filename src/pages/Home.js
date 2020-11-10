@@ -7,7 +7,13 @@ import Header from '../components/General/Header'
 import CarouselSlide from '../components/General/CarrouselImageHome';
 
 class Home extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            user: {},
 
+        };
+    }
     getProducts() {
         var auth = btoa('admin:123');
         axios.get('https://market-api-uade.herokuapp.com/api/v1/Products/get-all', {
@@ -22,7 +28,7 @@ class Home extends Component {
     }
 
     render() {
-        console.log(this.props.location.state.user)
+
         return (
             <div>
 
@@ -30,7 +36,7 @@ class Home extends Component {
                     <div>
                         <img src={logo} width="100" align="left" />
                     </div>
-                    <Header />
+                    <Header user ={this.state.user}/>
                 </div>
                 <CarouselSlide/>
                 <div>
