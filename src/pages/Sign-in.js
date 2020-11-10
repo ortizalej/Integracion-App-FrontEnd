@@ -1,5 +1,4 @@
 import React, { useEffect, useState, Component } from 'react';
-import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
@@ -10,8 +9,6 @@ import Container from '@material-ui/core/Container';
 import logo from '../Images/Logo.png';
 import axios from 'axios';
 import Link from '@material-ui/core/Link';
-import { useHistory } from "react-router-dom";
-
 
 const classes = theme => ({
   paper: {
@@ -60,15 +57,15 @@ class SignIn extends Component {
     }
     this.props.history.push({
       pathname: path,
-      state: { user: user}
+      state: { user: user }
     })
   }
-  getUser(emailAddress, password) {
+  async getUser(emailAddress, password) {
     let resp;
     var auth = btoa('admin:123');
     try {
       let url = 'https://market-api-uade.herokuapp.com/api/v1/Clients/get-by-email-and-password?emailAddress=' + emailAddress + '&password=' + password;
-      axios.get(url, {
+      await axios.get(url, {
         headers: {
           'Access-Control-Allow-Origin': '*',
           'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
@@ -79,13 +76,12 @@ class SignIn extends Component {
       ).then(response => {
         resp = response.data;
         this.SignInRedirect(response.data, emailAddress, password)
-
       })
     }
     catch {
       if (resp === undefined) {
         let url2 = 'https://market-api-uade.herokuapp.com/api/v1/Employees/get-by-email-and-password?emailAddress=' + emailAddress + '&password=' + password;
-        axios.get(url2, {
+        await axios.get(url2, {
           headers: {
             'Access-Control-Allow-Origin': '*',
             'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
@@ -96,7 +92,6 @@ class SignIn extends Component {
         ).then(response => {
           resp = response.data;
           this.SignInRedirect(response.data, emailAddress, password)
-
           if (resp === undefined) {
             console.log("El usuario no existe.")
           }
@@ -107,12 +102,13 @@ class SignIn extends Component {
     return resp;
   }
 
-  validateUser() {
+  async validateUser() {
     let emailAddress = document.getElementById("email").value;
     let password = document.getElementById("password").value;
 
-    this.getUser(emailAddress, password);
+    await this.getUser(emailAddress, password);
   }
+
   render() {
     const { classes } = this.props;
 
