@@ -16,19 +16,20 @@ class Product extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            masterProducts : [],
+            masterProducts: [],
             productsToShow: [],
             searchValue: null
         };
-      }
+    }
 
     filterProduct(filterTerm) {
         let term = filterTerm;
         let filterProducts = this.state.masterProducts.filter(item => item.productName.toLowerCase().indexOf(term) > -1);
         this.setState({
-            productsToShow : filterProducts,
-            search : true
-        })    }
+            productsToShow: filterProducts,
+            search: true
+        })
+    }
     getProducts() {
         var auth = btoa('admin:123');
         axios.get('https://market-api-uade.herokuapp.com/api/v1/Products/get-all', {
@@ -40,22 +41,22 @@ class Product extends Component {
             }
         }
         ).then(response => {
-            console.log('RESPONSE',response)
+            console.log('RESPONSE', response)
             this.setState({
-                masterProducts : response.data,
-                productsToShow : response.data
+                masterProducts: response.data,
+                productsToShow: response.data
             })
         })
     }
-    
+
 
     render() {
-        if(this.state.masterProducts.length == 0) { 
+        if (this.state.masterProducts.length == 0) {
             this.getProducts();
         }
         const onChange = (event) => {
-            this.state.searchValue = event.target.value 
-          };
+            this.state.searchValue = event.target.value
+        };
         return (
             <div>
 
@@ -82,7 +83,7 @@ class Product extends Component {
                                 inputProps={{ 'aria-label': 'Buscar Producto' }}
                                 onChange={onChange}
                             />
-                            <IconButton style={{ padding: 10 }} aria-label="search"  onClick={() => { this.filterProduct(this.state.searchValue)}}>
+                            <IconButton style={{ padding: 10 }} aria-label="search" onClick={() => { this.filterProduct(this.state.searchValue) }}>
                                 <SearchIcon />
                             </IconButton>
                         </Paper>
@@ -90,7 +91,7 @@ class Product extends Component {
                     </div>
                     <Header />
                 </div>
-                <div style={{marginTop: 5,marginLeft: 20}}>
+                <div style={{ marginTop: 5, marginLeft: 20 }}>
                     <ProductTable products={this.state.productsToShow} />
                 </div>
                 <div>

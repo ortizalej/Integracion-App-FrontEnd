@@ -41,9 +41,14 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     modal: {
-        display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        position:'absolute',
+        top:'10%',
+        left:'10%',
+        overflow:'scroll',
+        height:'100%',
+        display:'flex'
     },
     paper: {
         width: 400,

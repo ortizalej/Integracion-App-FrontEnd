@@ -26,8 +26,6 @@ function App() {
           <Route path="/sales" component={Sales} />
           <Route path="/facturation" component={Facturation} />
           <Route path="/productAdmin" component={ProductAdmin} />
-          
-
         </Switch>
       </Router>
     </div>
