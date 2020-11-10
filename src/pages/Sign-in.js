@@ -9,7 +9,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import logo from '../Images/Logo.png';
 import axios from 'axios';
-import { Redirect} from "react-router-dom";
+import { Redirect } from "react-router-dom";
+import Link from '@material-ui/core/Link';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -32,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function SignInRedirect(user,emailAddress,password) {
+function SignInRedirect(user, emailAddress, password) {
   let path;
 
   switch (user.role) {
@@ -57,7 +58,7 @@ function SignInRedirect(user,emailAddress,password) {
   }
 
   console.log(path);
-  return (window.location=path + '?email=' + btoa(emailAddress) + '&password=' + btoa(password))
+  return (window.location = path + '?email=' + btoa(emailAddress) + '&password=' + btoa(password))
 }
 
 export default function SignIn() {
@@ -106,7 +107,7 @@ export default function SignIn() {
     let password = document.getElementById("password").value;
 
     var user = await getUser(emailAddress, password);
-    SignInRedirect(user,emailAddress, password)
+    SignInRedirect(user, emailAddress, password)
   }
 
   const classes = useStyles();
@@ -169,6 +170,12 @@ export default function SignIn() {
           </Button>
 
         </form>
+        <div style={{marginTop:'1rem'}}>
+          <Link href="/sign-up" variant="body2">
+            {"No tienes cuenta? Registrate"}
+          </Link>
+        </div>
+
       </div>
       <Box mt={8}>
       </Box>

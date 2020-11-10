@@ -64,10 +64,10 @@ export default function SignUp() {
 
     let resp = await validateExistingUser(user.id);
 
-    if (resp === undefined) { createUser(user); }
+    if (resp === undefined) { await createUser(user); }
     else { console.log("El cliente ya existe"); }
 
-    // Redirect to sign in
+    return (window.location="./sign-in")
   }
 
   async function validateExistingUser(dni) {
