@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState, Component } from 'react';
 import Link from '@material-ui/core/Link';
-import { makeStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -11,33 +11,15 @@ import IconButton from '@material-ui/core/IconButton';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import IndeterminateCheckBoxIcon from '@material-ui/icons/IndeterminateCheckBox';
 // Generate Order Data
-function createData(id, name, price, stock, quantity) {
-    return { id, name, price, stock, quantity };
-}
 
-const rows = [
-    createData(0, 'Falopa', '1000', '3', '0'),
-    createData(1, 'Coca', '500', '3', '0'),
-];
-
-function preventDefault(event) {
-    event.preventDefault();
-}
-
-const useStyles = makeStyles((theme) => ({
+const classes = theme => ({
     seeMore: {
         marginTop: theme.spacing(3),
     },
-}));
-
-export default function Product(data) {
-    console.log('DATA LLEGADA',data.products)
-    let products = data.products
-    if(!data && !data.products) {
-        products = [{}]
-    }
-    const classes = useStyles();
-    return (
+});
+class ProductEditor extends Component {
+    render() {
+        return (
         <React.Fragment>
             <Table size="small">
                 <TableHead>
@@ -50,7 +32,7 @@ export default function Product(data) {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {products.map((row) => (
+                    {this.props.products.map((row) => (
                         <TableRow key={row.id}>
                             <TableCell>{row.productName}</TableCell>
                             <TableCell>{row.description}</TableCell>
@@ -69,5 +51,7 @@ export default function Product(data) {
                 </TableBody>
             </Table>
         </React.Fragment>
-    );
+        )
+    }
 }
+export default withStyles(classes, { withTheme: true })(ProductEditor);
