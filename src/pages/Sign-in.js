@@ -147,19 +147,7 @@ export default function SignIn() {
             id="password"
             autoComplete="current-password"
           />
-          {/* <Select
-            native
-            value={role}
-            onChange={handleChange}
-            fullWidth
-          >
-            <option aria-label="None" value="" />
-            <option value={'admin'}>Administracion</option>
-            <option value={'rrhh'}>Recursos Humanos</option>
-            <option value={'deposito'}>Encargado de Deposito</option>
-            <option value={'catagolador'}>Catagolador</option>
-            <option value={'despachante'}>Despachante</option>
-          </Select> */}
+          
           <Button
             fullWidth
             variant="contained"
