@@ -10,7 +10,7 @@ import { getSuggestedQuery } from '@testing-library/react';
 class Home extends Component {
     constructor(props) {
         super(props);
-        this.state = {
+        this.setSstate = {
             
         };
         this.user= this.getUser.bind(this);
@@ -85,7 +85,7 @@ class Home extends Component {
         return (
             <div>
 
-                <div style={{ marginTop: 60 }} >
+                <div style={{ marginTop: 40 }} >
                     <div>
                         <img src={logo} width="100" align="left" />
                     </div>

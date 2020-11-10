@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, makeStyles, CardMedia, CardActionArea } from '@material-ui/core';
+import { Card, makeStyles, CardMedia, CardActions } from '@material-ui/core';
 
 
 export default function Carousel(props) {
@@ -11,9 +11,9 @@ export default function Carousel(props) {
             borderRadius: 20,
             //padding: '75px 50px',
             margin: '0px 30px',
-            width: '400px',
-            justifyContent: 'center',
+            width: '300px',
             boxShadow: '10px 10px 10px black',
+            justifyContent: 'center',
             display: 'flex',
             justifyContent:'center',
             alignItems:'center',
@@ -21,6 +21,7 @@ export default function Carousel(props) {
             marginBottom:'2rem',
             marginLeft:'2rem',
             marginRight:'2rem'
+            
     
         },
         container: {
