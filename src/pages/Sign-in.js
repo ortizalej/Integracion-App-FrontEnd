@@ -9,7 +9,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import logo from '../Images/Logo.png';
 import axios from 'axios';
-import { Redirect } from "react-router-dom"
+import { Redirect} from "react-router-dom";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -32,15 +32,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function SignInRedirect(user) {
+function SignInRedirect(user,emailAddress,password) {
   let path;
 
   switch (user.role) {
     case 0: // Client
-      path = "../"
+      path = "/"
       break;
     case 1: // Admin
-      path = "../admin"
+      path = "/admin"
       break;
     case 2: // RR.HH.
       path = "/users"
@@ -57,7 +57,7 @@ function SignInRedirect(user) {
   }
 
   console.log(path);
-  return <Redirect to="www.google.com" />
+  return (window.location=path + '?email=' + btoa(emailAddress) + '&password=' + btoa(password))
 }
 
 export default function SignIn() {
@@ -106,7 +106,7 @@ export default function SignIn() {
     let password = document.getElementById("password").value;
 
     var user = await getUser(emailAddress, password);
-    SignInRedirect(user)
+    SignInRedirect(user,emailAddress, password)
   }
 
   const classes = useStyles();
