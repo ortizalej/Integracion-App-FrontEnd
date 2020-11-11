@@ -11,7 +11,8 @@ var style = {
     bottom: "0",
     height: "20px",
     width: "100%",
-    padding: "100px"
+    paddingBottom: "85px",
+    paddingTop: "10px"
 }
 
 
