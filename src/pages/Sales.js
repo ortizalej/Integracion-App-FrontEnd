@@ -17,7 +17,7 @@ import Paper from '@material-ui/core/Paper';
 import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import { mainListItems } from '../components/Forms/listItems';
+import { dispatcherListItems } from '../components/Forms/listItems';
 import SalesABM from '../components/Sales/SalesABM';
 import axios from 'axios';
 
@@ -170,7 +170,7 @@ class Sales extends Component {
             </IconButton>
           </div>
           <Divider />
-          <List>{mainListItems}</List>
+          <List>{dispatcherListItems}</List>
           <Divider />
         </Drawer>
         <main className={classes.content}>

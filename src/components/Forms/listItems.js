@@ -1,4 +1,3 @@
-
 import React from 'react';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -9,57 +8,9 @@ import PeopleIcon from '@material-ui/icons/People';
 import LayersIcon from '@material-ui/icons/Layers';
 import { BrowserRouter as Router, Link } from "react-router-dom";
 
-export const mainListItems =(
-  <div>
-    <Link to={{ pathname: '/admin' }} style={{ textDecoration: 'none', color: 'black' }}>
-
-      <ListItem button>
-        <ListItemIcon>
-          <DashboardIcon />
-        </ListItemIcon>
-        <ListItemText primary="Ordenes de compra" />
-      </ListItem>
-    </Link>
-    <Link to={{ pathname: '/sales' }} style={{ textDecoration: 'none', color: 'black' }}>
-      <ListItem button>
-        <ListItemIcon>
-          <ShoppingCartIcon />
-        </ListItemIcon>
-        <ListItemText primary="Despachador" />
-      </ListItem>
-    </Link>
-    <Link to={{ pathname: '/users' }} style={{ textDecoration: 'none', color: 'black' }}>
-      <ListItem button>
-        <ListItemIcon>
-          <PeopleIcon />
-        </ListItemIcon>
-        <ListItemText primary="Usuarios" />
-      </ListItem>
-    </Link>
-    <Link to={{ pathname: '/facturation' }} style={{ textDecoration: 'none', color: 'black' }}>
-
-      <ListItem button>
-        <ListItemIcon>
-          <LayersIcon />
-        </ListItemIcon>
-        <ListItemText primary="Facturacion" />
-      </ListItem>
-    </Link>
-    <Link to={{ pathname: '/productAdmin' }} style={{ textDecoration: 'none', color: 'black' }}>
-
-      <ListItem button>
-        <ListItemIcon>
-          <LayersIcon />
-        </ListItemIcon>
-        <ListItemText primary="Admin. Productos" />
-      </ListItem>
-    </Link>
-  </div>
-);
-
 export const dispatcherListItems = (
   <div>
-    <Link to={{ pathname: '/sales' }} style={{ textDecoration: 'none', color: 'black' }}>
+    <Link to={{ pathname: '/deliverer' }} style={{ textDecoration: 'none', color: 'black' }}>
       <ListItem button>
         <ListItemIcon>
           <ShoppingCartIcon />
@@ -85,7 +36,7 @@ export const RRHHListItems = (
 
 export const adminListItems = (
   <div>
-    <Link to={{ pathname: '/facturation' }} style={{ textDecoration: 'none', color: 'black' }}>
+    <Link to={{ pathname: '/billing' }} style={{ textDecoration: 'none', color: 'black' }}>
 
       <ListItem button>
         <ListItemIcon>
@@ -94,12 +45,12 @@ export const adminListItems = (
         <ListItemText primary="Facturacion" />
       </ListItem>
     </Link>
-    <Link to={{ pathname: '/sales' }} style={{ textDecoration: 'none', color: 'black' }}>
+    <Link to={{ pathname: '/ordenes-de-compra' }} style={{ textDecoration: 'none', color: 'black' }}>
       <ListItem button>
         <ListItemIcon>
-          <ShoppingCartIcon />
+          <DashboardIcon />
         </ListItemIcon>
-        <ListItemText primary="Ordenes" />
+        <ListItemText primary="Ordenes de compra" />
       </ListItem>
     </Link>
   </div>
@@ -107,7 +58,7 @@ export const adminListItems = (
 
 export const productListItems = (
   <div>
-    <Link to={{ pathname: '/productAdmin' }} style={{ textDecoration: 'none', color: 'black' }}>
+    <Link to={{ pathname: '/cataloger' }} style={{ textDecoration: 'none', color: 'black' }}>
 
       <ListItem button>
         <ListItemIcon>

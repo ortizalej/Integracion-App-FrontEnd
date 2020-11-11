@@ -40,19 +40,19 @@ class SignIn extends Component {
         path = "/products"
         break;
       case 1: // Admin
-        path = "/admin"
+        path = "/ordenes-de-compra"
         break;
       case 2: // RR.HH.
         path = "/users"
         break;
       case 3: // Encargado de depósito
-        path = "/productsAdmin"
+        path = "/cataloger"
         break;
       case 4: // Catalogador
-        path = "/productsAdmin"
+        path = "/cataloger"
         break;
       case 5: // Despachante
-        path = "/sales"
+        path = "/deliverer"
         break;
     }
     this.props.history.push({

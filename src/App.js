@@ -19,13 +19,13 @@ function App() {
           <Route path="/" exact component={Home} />
           <Route path="/sign-in" component={SignIn} />
           <Route path="/sign-up" component={SignUp} />
-          <Route path="/admin" component={Admin} />
+          <Route path="/ordenes-de-compra" component={Admin} />
           <Route path="/checkout" component={Checkout} />
           <Route path="/products" component={Products} />
           <Route path="/users" component={Users} />
-          <Route path="/sales" component={Sales} />
-          <Route path="/facturation" component={Facturation} />
-          <Route path="/productAdmin" component={ProductAdmin} />
+          <Route path="/deliverer" component={Sales} />
+          <Route path="/billing" component={Facturation} />
+          <Route path="/cataloger" component={ProductAdmin} />
 
         </Switch>
       </Router>

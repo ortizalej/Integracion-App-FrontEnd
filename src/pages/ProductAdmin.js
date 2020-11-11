@@ -17,7 +17,7 @@ import Paper from '@material-ui/core/Paper';
 import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import { mainListItems } from '../components/Forms/listItems';
+import { productListItems } from '../components/Forms/listItems';
 import ProductsABM from '../components/Products/ProductsABM';
 
 function Copyright() {
@@ -168,7 +168,7 @@ class ProductAdmin extends Component {
             </IconButton>
           </div>
           <Divider />
-          <List>{mainListItems}</List>
+          <List>{productListItems}</List>
           <Divider />
         </Drawer>
         <main className={classes.content}>
