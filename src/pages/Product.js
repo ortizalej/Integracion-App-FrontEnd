@@ -22,7 +22,6 @@ class Product extends Component {
             cartProducts: new Map(),
             init: true,
             user: null
-
         };
     }
 
@@ -85,13 +84,16 @@ class Product extends Component {
         const onChange = (event) => {
             this.state.searchValue = event.target.value
         };
+    
         if (this.props.location.state != null && !this.state.login) {
             this.state.user = this.props.location.state.user 
             this.setState({
                 user : this.props.location.state.user,
                 login: true
             })
-            console.log(this.state.user)
+        }
+        if(this.state.user == null) {
+            return (window.location="./sign-in")
         }
         return (
             <div>

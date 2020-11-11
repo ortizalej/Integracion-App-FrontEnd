@@ -120,7 +120,8 @@ class Sales extends Component {
     this.state = {
       open: true,
       masterOrders: [],
-      init: true
+      init: true,
+      user: null
     };
   }
   handleDrawerOpen = () => {
@@ -136,7 +137,16 @@ class Sales extends Component {
 
   render() {
     const { classes } = this.props;
-
+    if (this.props.location.state != null && !this.state.login) {
+      this.state.user = this.props.location.state.user
+      this.setState({
+        user: this.props.location.state.user,
+        login: true
+      })
+    }
+    if (this.state.user == null) {
+      return (window.location = "./sign-in")
+    }
     return (
       <div className={classes.root}>
         <CssBaseline />

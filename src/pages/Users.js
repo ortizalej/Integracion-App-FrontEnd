@@ -105,7 +105,8 @@ class Users extends Component {
     super(props);
     this.state = {
       open: true,
-      employees: []
+      employees: [],
+      user: null
     };
   }
   handleDrawerOpen = () => {
@@ -137,7 +138,16 @@ class Users extends Component {
   }
   render() {
     const { classes } = this.props;
-
+    if (this.props.location.state != null && !this.state.login) {
+      this.state.user = this.props.location.state.user
+      this.setState({
+        user: this.props.location.state.user,
+        login: true
+      })
+    }
+    if (this.state.user == null) {
+      return (window.location = "./sign-in")
+    }
     if (this.state.employees.length == 0) {
       this.getEmployees();
     }
