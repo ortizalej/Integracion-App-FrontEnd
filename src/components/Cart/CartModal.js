@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { Component } from 'react';
 
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -6,7 +6,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import axios from 'axios';
 import Select from '@material-ui/core/Select';
@@ -15,25 +15,9 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import IconButton from '@material-ui/core/IconButton';
-import AddCircleIcon from '@material-ui/icons/AddCircle';
-import IndeterminateCheckBoxIcon from '@material-ui/icons/IndeterminateCheckBox';
-function createData(id, name, price, quantity) {
-    return { id, name, price, quantity };
-}
+import { v4 as uuidv4 } from 'uuid';
 
-const rows = [
-    createData(0, '16 Mar, 2019', 'Elvis Presley', '1'),
-    createData(1, '16 Mar, 2019', 'Paul McCartney', '1'),
-    createData(2, '16 Mar, 2019', 'Tom Scholz', '1'),
-    createData(3, '16 Mar, 2019', 'Michael Jackson', '1'),
-    createData(4, '15 Mar, 2019', 'Bruce Springsteen', '1'),
-];
-
-function preventDefault(event) {
-    event.preventDefault();
-}
-const useStyles = makeStyles((theme) => ({
+const classes = theme => ({
     paper: {
         marginTop: theme.spacing(8),
         display: 'flex',
@@ -51,17 +35,59 @@ const useStyles = makeStyles((theme) => ({
     submit: {
         margin: theme.spacing(3, 0, 2),
     },
-}));
+});
+class CartModal extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            cartProducts: this.props.cartProducts,
+            cartProductsList: Array.from(this.props.cartProducts.keys()),
+            user: this.props.user,
+            cartId: null
 
-export default function UserForm() {
-    const classes = useStyles();
-    const [role, setRole] = React.useState('');
+        };
+    }
+    redirectCheckout() {
+        this.props.redirectCheckout(this.state.cartProducts)
 
-    const handleChange = (event) => {
-        setRole(event.target.value);
-    };
-    function createClient() {
-        axios.post('https://market-api-uade.herokuapp.com/api/v1/Clients/{id}', {
+    }
+    makeProductDetail() {
+        let index = 1
+        let productDetail = {}
+        this.state.cartProducts.forEach((values, keys) => {
+            productDetail['additionalProp' + index] = values.selectedAmount
+            index++;
+        })
+        return productDetail
+    }
+    createClient() {
+        let body = {
+            "id": uuidv4(),
+            "userDni": this.state.user.id,
+            "productDetails": {
+                "additionalProp1": {
+                    "product": {
+                        "id": "string",
+                        "productName": "string",
+                        "description": "string",
+                        "brand": "string",
+                        "category": "string",
+                        "weight": "string",
+                        "price": 0,
+                        "pictureUrl": "string",
+                        "discountRate": 0,
+                        "stock": 0,
+                        "technicalSpecifications": {
+                            "additionalProp1": "string",
+                            "additionalProp2": "string",
+                            "additionalProp3": "string"
+                        }
+                    },
+                    "selectedAmount": 0
+                }
+            }
+        }
+        axios.post('https://market-api-uade.herokuapp.com/api/v1/ShoppingCar/create', {
             headers: {
                 'Access-Control-Allow-Origin': '*',
                 'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
@@ -70,46 +96,52 @@ export default function UserForm() {
         }
         ).then(response => console.log(response.data))
     }
+    render() {
+        return (
+            <Container component="main" maxWidth="xs">
+                <CssBaseline />
+                <div className={classes.paper}>
+                    <Typography component="h1" variant="h5">
+                        Productos
+            </Typography>
+                    <Table size="small">
+                        <TableHead>
+                            <TableRow>
+                                <TableCell>Nombre</TableCell>
+                                <TableCell>Precio</TableCell>
+                                <TableCell>Cantidad</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {this.state.cartProductsList.map((row) => (
+                                <TableRow key={row.id}>
+                                    <TableCell>{row.productName}</TableCell>
+                                    <TableCell>{row.price}</TableCell>
+                                    <TableCell>{this.state.cartProducts.get(row).selectedAmount}</TableCell>
 
-    return (
-        <Container component="main" maxWidth="xs">
-            <CssBaseline />
-            <div className={classes.paper}>
-                <Typography component="h1" variant="h5">
-                    Productos
-        </Typography>
-        <Table size="small">
-                <TableHead>
-                    <TableRow>
-                        <TableCell>Nombre</TableCell>
-                        <TableCell>Precio</TableCell>
-                        <TableCell>Cantidad</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {rows.map((row) => (
-                        <TableRow key={row.id}>
-                            <TableCell>{row.name}</TableCell>
-                            <TableCell>{row.price}</TableCell>
-                            <TableCell>{row.quantity}</TableCell>
-
-                        </TableRow>
-                    ))}
-                </TableBody>
-            </Table>
-            <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-            onClick={() => { window.location.href = '/checkout' }}
-          >
-            Confirmar
-          </Button>
-            </div>
-            <Box mt={8}>
-            </Box>
-        </Container>
-    );
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                    <Button
+                        fullWidth
+                        variant="contained"
+                        color="primary"
+                        className={classes.submit}
+                        onClick={() => {
+                            this.props.history.push({
+                                pathname: '/checkout',
+                                state: { cartProducts: this.state.cartProducts }
+                            })
+                        }}
+                    >
+                        Confirmar
+              </Button>
+                </div>
+                <Box mt={8}>
+                </Box>
+            </Container>
+        );
+    }
 }
+export default withStyles(classes, { withTheme: true })(CartModal);

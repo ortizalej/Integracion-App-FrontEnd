@@ -10,7 +10,7 @@ import Users from './pages/Users'
 import Sales from './pages/Sales'
 import Facturation from './pages/Facturation'
 import ProductAdmin from './pages/ProductAdmin'
-
+import CartModal from './components/Cart/CartModal'
 function App() {
   return (
     <div className="App">
@@ -26,6 +26,7 @@ function App() {
           <Route path="/sales" component={Sales} />
           <Route path="/facturation" component={Facturation} />
           <Route path="/productAdmin" component={ProductAdmin} />
+
         </Switch>
       </Router>
     </div>

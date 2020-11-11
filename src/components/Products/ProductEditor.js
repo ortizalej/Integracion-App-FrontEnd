@@ -18,39 +18,57 @@ const classes = theme => ({
     },
 });
 class ProductEditor extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            masterProducts: [],
+        };
+    }
+    updateCartProduct(row, action) {
+        this.props.updateCartProduct(row, action);
+    }
+
     render() {
         return (
-        <React.Fragment>
-            <Table size="small">
-                <TableHead>
-                    <TableRow>
-                        <TableCell>Producto</TableCell>
-                        <TableCell>Descripcion</TableCell>
-                        <TableCell>Precio</TableCell>
-                        <TableCell>Cantidad</TableCell>
-                        <TableCell ></TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {this.props.products.map((row) => (
-                        <TableRow key={row.id}>
-                            <TableCell>{row.productName}</TableCell>
-                            <TableCell>{row.description}</TableCell>
-                            <TableCell>{row.price}</TableCell>
-                            <TableCell>{row.stock}</TableCell>
-                            <TableCell>
-                                <IconButton color="primary" aria-label="upload picture" component="span">
-                                    <AddCircleIcon />
-                                </IconButton>
-                                <IconButton color="primary" aria-label="upload picture" component="span">
-                                    <IndeterminateCheckBoxIcon />
-                                </IconButton>
-                            </TableCell>
+            <React.Fragment>
+                <Table size="small">
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>Producto</TableCell>
+                            <TableCell>Descripcion</TableCell>
+                            <TableCell>Precio</TableCell>
+                            <TableCell ></TableCell>
                         </TableRow>
-                    ))}
-                </TableBody>
-            </Table>
-        </React.Fragment>
+                    </TableHead>
+                    <TableBody>
+                        {this.props.products.map((row) => (
+                            <TableRow key={row.id}>
+                                <TableCell>{row.productName}</TableCell>
+                                <TableCell>{row.description}</TableCell>
+                                <TableCell>{row.price}</TableCell>
+                                <TableCell>
+                                    <IconButton
+                                        color="primary"
+                                        aria-label="upload picture"
+                                        component="span"
+                                        onClick={() => { this.updateCartProduct(row,'add')}}
+                                    >
+                                        <AddCircleIcon />
+                                    </IconButton>
+                                    <IconButton
+                                        color="primary"
+                                        aria-label="upload picture"
+                                        component="span"
+                                        onClick={() => { this.updateCartProduct(row,'minus') }}
+                                    >
+                                        <IndeterminateCheckBoxIcon />
+                                    </IconButton>
+                                </TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </React.Fragment>
         )
     }
 }

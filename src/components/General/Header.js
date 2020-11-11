@@ -14,6 +14,8 @@ import CartModal from '../Cart/CartModal'
 import Modal from '@material-ui/core/Modal';
 import Fade from '@material-ui/core/Fade';
 import Backdrop from '@material-ui/core/Backdrop';
+import { useHistory } from "react-router-dom";
+
 const classes = theme => ({
   root: {
   },
@@ -54,8 +56,8 @@ class Header extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: {},
-      products: []
+      user: null,
+      cartProducts: new Map()
 
     };
   }
@@ -74,40 +76,59 @@ class Header extends Component {
       })
     }
   };
+
   render() {
     const { classes } = this.props;
-    if(this.props.user != null && !this.state.user) {
+    console.log(this)
+
+    if (this.props.user != null && !this.state.user) {
       this.setState({
         user: this.props.user
       })
     }
-    console.log(this.props.user)
+    if (this.props.cartProducts && this.state.cartProducts != this.props.cartProducts) {
+      this.setState({ cartProducts: this.props.cartProducts })
+    }
     return (
       <div className={classes.root}>
         <AppBar position="static">
           <Toolbar>
             <Typography className={classes.title}>
             </Typography>
-            <Link to={{ pathname: '/' }} style={{ textDecoration: 'none', color: 'white' }}>
-              <Button color="inherit">Inicio </Button>
-            </Link>
-            <Link to={{ pathname: '/products' }} style={{ textDecoration: 'none', color: 'white' }}>
-              <Button color="inherit">Productos </Button>
-            </Link>
-            {this.state.user.userName == null ?
+            {this.state.user == null ?
+              <Link to={{ pathname: '/' }} style={{ textDecoration: 'none', color: 'white' }}>
+                <Button color="inherit">Inicio </Button>
+              </Link>
+              :
+              <Link to={{ pathname: '/products' }} style={{ textDecoration: 'none', color: 'white' }}>
+                <Button color="inherit">Productos </Button>
+              </Link>
+            }
+            {this.state.user == null ?
 
               <Link to={{ pathname: '/sign-in' }} style={{ textDecoration: 'none', color: 'white' }}>
                 <Button color="inherit">Ingresar </Button>
               </Link>
               :
-                <Button color="inherit">{this.state.user.userName} </Button>
+              <div>
+
+                <Link to={{ pathname: '/sign-in' }} style={{ textDecoration: 'none', color: 'white' }}>
+                  <Button color="inherit">Cerrar Sesion</Button>
+                </Link>
+                <IconButton aria-label="cart" onClick={this.handleOpen}>
+                  <StyledBadge badgeContent={this.state.cartProducts.size} color="secondary">
+                    <ShoppingCartIcon />
+                  </StyledBadge>
+                </IconButton>
+                <Link to={{ pathname: '/products' }} style={{ textDecoration: 'none', color: 'white' }}>
+                  <Button variant="contained" style={{ pointerEvents: 'none' }}>{this.state.user.userName} </Button>
+                </Link>
+              </div>
+
+
 
             }
-            <IconButton aria-label="cart" onClick={this.handleOpen}>
-              <StyledBadge badgeContent={this.state.products.length} color="secondary">
-                <ShoppingCartIcon />
-              </StyledBadge>
-            </IconButton>
+
           </Toolbar>
         </AppBar>
         <Modal
@@ -124,7 +145,7 @@ class Header extends Component {
         >
           <Fade in={this.state.open}>
             <div className={classes.paper}>
-              <CartModal />
+              <CartModal cartProducts={this.state.cartProducts} {...this.props} user={this.state.user} />
             </div>
           </Fade>
         </Modal>

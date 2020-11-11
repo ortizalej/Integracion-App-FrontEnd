@@ -10,7 +10,7 @@ class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            user: {},
+            user: null,
             login: false
 
         };
@@ -30,13 +30,11 @@ class Home extends Component {
 
     render() {
         if (this.props.location.state != null && !this.state.login) {
-            console.log(this.props.location.state.user)
             this.setState({
                 user : this.props.location.state.user,
                 login: true
             })
         }
-        
         return (
             <div>
 
@@ -44,7 +42,7 @@ class Home extends Component {
                     <div>
                         <img src={logo} width="100" align="left" />
                     </div>
-                    <Header user={this.state.user} />
+                    <Header user={this.state.user} {...this.props} />
                 </div>
                 <CarouselSlide />
                 <div>

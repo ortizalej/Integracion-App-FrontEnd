@@ -1,5 +1,5 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import React, { Component } from 'react';
+import { withStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -13,20 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import AddressForm from '../components/Checkouts/AddressForm';
 import Review from '../components/Checkouts/Review';
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
-
-const useStyles = makeStyles((theme) => ({
+const classes = theme => ({
   appBar: {
     position: 'relative',
   },
@@ -61,89 +48,106 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(3),
     marginLeft: theme.spacing(1),
   },
-}));
+});
 
-const steps = ['Datos de envio', 'Verifica tu orden'];
+class Checkout extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      activeStep: 0,
+      cartProducts: this.props.location.state.cartProducts,
+      addressForm: null
+    };
+  }
 
-function getStepContent(step) {
-  switch (step) {
-    case 0:
-      return <AddressForm />;
-    case 1:
-      return <Review />;
-    default:
-      throw new Error('Unknown step');
+  updateAddress(address) {
+
+    this.setState({
+      addressForm: address,
+      activeStep: 1
+    })
+
+  }
+  finishSale() {
+    this.setState({
+      activeStep: 2
+    })
+  }
+  goBack() {
+    this.setState({
+      activeStep: 0
+    })
+
+  }
+  getStepContent(step) {
+    switch (step) {
+      case 0:
+        return <AddressForm
+          updateAddress={this.updateAddress.bind(this)}
+          addressForm={this.state.addressForm}
+        />;
+      case 1:
+        return <Review
+          cartProducts={this.state.cartProducts}
+          addressForm={this.state.addressForm}
+          goBack={this.goBack.bind(this)}
+          finishSale={this.finishSale.bind(this)}
+        />;
+      default:
+        throw new Error('Unknown step');
+    }
+  }
+  handleNext = () => {
+    this.setState({ activeStep: this.state.activeStep + 1 })
+  };
+
+  handleBack = () => {
+    this.setState({ activeStep: this.state.activeStep - 1 })
+  };
+  render() {
+    const steps = ['Datos de envio', 'Verifica tu orden'];
+
+    const { classes } = this.props;
+    return (
+      <React.Fragment>
+        <CssBaseline />
+        <AppBar position="absolute" color="default" className={classes.appBar}>
+          <Toolbar>
+            <Typography variant="h6" color="inherit" noWrap>
+              Super En Casa
+          </Typography>
+          </Toolbar>
+        </AppBar>
+        <main className={classes.layout}>
+          <Paper className={classes.paper}>
+            <Typography component="h1" variant="h4" align="center">
+              Datos de envio
+          </Typography>
+            <Stepper activeStep={this.state.activeStep} className={classes.stepper}>
+              {steps.map((label) => (
+                <Step key={label}>
+                  <StepLabel>{label}</StepLabel>
+                </Step>
+              ))}
+            </Stepper>
+            <React.Fragment>
+              {this.state.activeStep === steps.length ? (
+                <React.Fragment>
+                  <Typography variant="h5" gutterBottom>
+                    Gracias por su compra
+                </Typography>
+                </React.Fragment>
+              ) : (
+                  <React.Fragment>
+                    {this.getStepContent(this.state.activeStep)}
+
+                  </React.Fragment>
+                )}
+            </React.Fragment>
+          </Paper>
+        </main>
+      </React.Fragment>
+    )
   }
 }
-
-export default function Checkout() {
-  const classes = useStyles();
-  const [activeStep, setActiveStep] = React.useState(0);
-
-  const handleNext = () => {
-    setActiveStep(activeStep + 1);
-  };
-
-  const handleBack = () => {
-    setActiveStep(activeStep - 1);
-  };
-
-  return (
-    <React.Fragment>
-      <CssBaseline />
-      <AppBar position="absolute" color="default" className={classes.appBar}>
-        <Toolbar>
-          <Typography variant="h6" color="inherit" noWrap>
-            Super En Casa
-          </Typography>
-        </Toolbar>
-      </AppBar>
-      <main className={classes.layout}>
-        <Paper className={classes.paper}>
-          <Typography component="h1" variant="h4" align="center">
-            Datos de envio
-          </Typography>
-          <Stepper activeStep={activeStep} className={classes.stepper}>
-            {steps.map((label) => (
-              <Step key={label}>
-                <StepLabel>{label}</StepLabel>
-              </Step>
-            ))}
-          </Stepper>
-          <React.Fragment>
-            {activeStep === steps.length ? (
-              <React.Fragment>
-                <Typography variant="h5" gutterBottom>
-                  Gracias por su compra
-                </Typography>
-                <Typography variant="subtitle1">
-                  Tu orden numero ####### ha sido completada, te llegara un mail de verificacion
-                </Typography>
-              </React.Fragment>
-            ) : (
-              <React.Fragment>
-                {getStepContent(activeStep)}
-                <div className={classes.buttons}>
-                  {activeStep !== 0 && (
-                    <Button onClick={handleBack} className={classes.button}>
-                      Atras
-                    </Button>
-                  )}
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={handleNext}
-                    className={classes.button}
-                  >
-                    {activeStep === steps.length - 1 ? 'Confirmar Orden' : 'Siguiente'}
-                  </Button>
-                </div>
-              </React.Fragment>
-            )}
-          </React.Fragment>
-        </Paper>
-        <Copyright />
-      </main>
-    </React.Fragment>
-  );
-}
+export default withStyles(classes, { withTheme: true })(Checkout);

@@ -73,7 +73,6 @@ class ProductABM extends Component {
             array.splice(index, 1);
             this.setState({ employees: array });
         }
-        console.log(row.id)
         this.deleteEmployee(row.id)
     }
     updateProductList(row, action) {

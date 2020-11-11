@@ -19,7 +19,9 @@ class Product extends Component {
             masterProducts: [],
             productsToShow: [],
             searchValue: null,
-            init: true
+            cartProducts: new Map(),
+            init: true,
+            user: null
 
         };
     }
@@ -47,11 +49,34 @@ class Product extends Component {
             this.setState({
                 masterProducts: response.data,
                 productsToShow: response.data,
-                init: false
+                init: false,
+
             })
         })
     }
-
+    updateCartProduct(row, action) {
+        let cartProducts = this.state.cartProducts;
+        if (cartProducts.has(row)) {
+            if (action == 'add') {
+                cartProducts.get(row).selectedAmount = cartProducts.get(row).selectedAmount + 1;
+            } else if (action == 'minus') {
+                if (cartProducts.get(row).selectedAmount > 1) {
+                    cartProducts.get(row).selectedAmount = cartProducts.get(row).selectedAmount - 1;
+                } else if (cartProducts.get(row).selectedAmount == 1) {
+                    console.log('BORRAR')
+                    cartProducts.delete(row)
+                }
+            }
+        } else {
+            if (action == 'add') {
+                cartProducts.set(row, { selectedAmount: 1 });
+            }
+        }
+        console.log(cartProducts)
+        this.setState({
+            cartProducts: cartProducts
+        })
+    }
 
     render() {
         if (this.state.init) {
@@ -60,6 +85,14 @@ class Product extends Component {
         const onChange = (event) => {
             this.state.searchValue = event.target.value
         };
+        if (this.props.location.state != null && !this.state.login) {
+            this.state.user = this.props.location.state.user 
+            this.setState({
+                user : this.props.location.state.user,
+                login: true
+            })
+            console.log(this.state.user)
+        }
         return (
             <div>
 
@@ -92,10 +125,13 @@ class Product extends Component {
                         </Paper>
 
                     </div>
-                    <Header />
+                    <Header cartProducts={this.state.cartProducts}  {...this.props} user={this.state.user} />
                 </div>
                 <div style={{ marginTop: 5, marginLeft: 20 }}>
-                    <ProductTable products={this.state.productsToShow} />
+                    <ProductTable
+                        products={this.state.productsToShow}
+                        updateCartProduct={this.updateCartProduct.bind(this)}
+                    />
                 </div>
                 <div>
                     <Footer />

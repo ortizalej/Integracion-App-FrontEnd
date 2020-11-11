@@ -40,7 +40,7 @@ class SignIn extends Component {
 
     switch (user.role) {
       case 0: // Client
-        path = "/"
+        path = "/products"
         break;
       case 1: // Admin
         path = "/admin"
