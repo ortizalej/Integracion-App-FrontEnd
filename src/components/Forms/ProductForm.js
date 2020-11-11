@@ -119,7 +119,7 @@ class ProductForm extends Component {
 
         }
       }
-      ).then(response => console.log(response.data))
+      ).then(response => this.props.updateProductList(body, 'new'))
     } else if (action == 'edit') {
       console.log('BODY', body)
 

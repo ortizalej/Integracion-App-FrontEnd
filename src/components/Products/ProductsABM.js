@@ -67,15 +67,29 @@ class ProductABM extends Component {
         })
     };
     handleDelete = (row) => {
-        var array = [...this.state.employees];
+        var array = [...this.state.product];
         var index = array.indexOf(row)
         if (index !== -1) {
             array.splice(index, 1);
-            this.setState({ employees: array });
+            this.setState({ product: array });
         }
-        this.deleteEmployee(row.id)
+        this.deleteProduct(row.id)
+    }
+    deleteProduct(id) {
+        const auth = btoa('admin:123');
+        axios.delete('https://market-api-uade.herokuapp.com/api/v1/Products/delete?id=' + id, {
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
+                'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token',
+                'Authorization': 'Basic ' + auth
+
+            }
+        }
+        ).then(response => console.log(response.data))
     }
     updateProductList(row, action) {
+        console.log(action)
         let newProductList = this.state.product
         if (action == 'new') {
             newProductList.push(row)
