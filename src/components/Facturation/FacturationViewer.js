@@ -1,5 +1,4 @@
 import React, { useState, Component } from 'react';
-import Link from '@material-ui/core/Link';
 import { withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -8,6 +7,8 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Title from '../Title';
 import axios from 'axios';
+import moment from 'moment'
+import Select from '@material-ui/core/Select';
 
 
 const classes = theme => ({
@@ -21,12 +22,35 @@ class FacturacionViewer extends Component {
     super(props);
     this.state = {
       masterOrders: [],
-      init: true
+      showOrders: [],
+      init: true,
+      type: this.props.type,
+      hidePaymentList: this.props.hidePaymentList,
     };
   }
+
+  handleChangePaymentMethod = (event) => {
+    let filterProducts;
+    filterProducts = this.state.masterOrders.filter(item => item.paymentMethod == event.target.value);
+    if (event.target.value === '') {
+      filterProducts = this.state.masterOrders
+    }
+    this.setState({
+      showOrders: filterProducts
+    })
+  };
+
   getOrders() {
     var auth = btoa('admin:123');
-    axios.get('https://market-api-uade.herokuapp.com/api/v1/Sales/get-all', {
+    var url = 'https://market-api-uade.herokuapp.com/api/v1/Sales/'
+    if (this.state.type === "Date") {
+      url += 'get-by-date?saleDate=' + moment().format('MM-DD-YYYY');
+    }
+    else {
+      url += "get-all";
+    }
+
+    axios.get(url, {
       headers: {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
@@ -35,9 +59,9 @@ class FacturacionViewer extends Component {
       }
     }
     ).then(response => {
-      console.log('RESPONSE', response)
       this.setState({
         masterOrders: response.data,
+        showOrders: response.data,
         init: false
       })
     })
@@ -49,6 +73,23 @@ class FacturacionViewer extends Component {
     }
     return (
       <React.Fragment>
+        {this.state.hidePaymentList == false ?
+          <Select
+            native
+            value={this.state.paymentMethod}
+            onChange={this.handleChangePaymentMethod}
+            fullWidth
+            id="paymentMethod"
+          >
+            <option value={''}>Todos</option>
+            <option value={'Débito'}>Débito</option>
+            <option value={'Crédito'}>Crédito</option>
+            <option value={'Efectivo'}>Efectivo</option>
+          </Select>
+          :
+          <p></p>
+        }
+
         <Title>Ordenes de compra</Title>
         <Table size="small">
           <TableHead>
@@ -61,7 +102,7 @@ class FacturacionViewer extends Component {
             </TableRow>
           </TableHead>
           <TableBody>
-            {this.state.masterOrders.map((row) => (
+            {this.state.showOrders.map((row) => (
               <TableRow key={row.id}>
                 <TableCell>{row.date}</TableCell>
                 <TableCell>{row.id}</TableCell>

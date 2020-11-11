@@ -64,10 +64,10 @@ export default function FacturationTabs() {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        <FacturationViewer/>
+        <FacturationViewer type={"Date"} hidePaymentList={true}/>
       </TabPanel>
       <TabPanel value={value} index={1}>
-      <FacturationViewer/>
+      <FacturationViewer type={"PaymentMethod"} hidePaymentList={false}/>
       </TabPanel>
     </div>
   );
