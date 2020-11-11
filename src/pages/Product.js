@@ -55,14 +55,13 @@ class Product extends Component {
     }
     updateCartProduct(row, action) {
         let cartProducts = this.state.cartProducts;
-        if (cartProducts.has(row)) {
-            if (action == 'add') {
+        if (cartProducts.has(row)  ) {
+            if (action == 'add' && cartProducts.get(row).selectedAmount < row.stock) {
                 cartProducts.get(row).selectedAmount = cartProducts.get(row).selectedAmount + 1;
             } else if (action == 'minus') {
                 if (cartProducts.get(row).selectedAmount > 1) {
                     cartProducts.get(row).selectedAmount = cartProducts.get(row).selectedAmount - 1;
                 } else if (cartProducts.get(row).selectedAmount == 1) {
-                    console.log('BORRAR')
                     cartProducts.delete(row)
                 }
             }
@@ -71,7 +70,6 @@ class Product extends Component {
                 cartProducts.set(row, { selectedAmount: 1 });
             }
         }
-        console.log(cartProducts)
         this.setState({
             cartProducts: cartProducts
         })
