@@ -45,9 +45,15 @@ class Product extends Component {
         }
         ).then(response => {
             console.log('RESPONSE', response)
+            let masterProduct = []
+            for (let i = 0; i < response.data.length; i++) {
+                if(response.data[i].stock > 0){
+                    masterProduct.push(response.data[i])
+                }                
+            }
             this.setState({
-                masterProducts: response.data,
-                productsToShow: response.data,
+                masterProducts: masterProduct,
+                productsToShow: masterProduct,
                 init: false,
 
             })
@@ -55,7 +61,7 @@ class Product extends Component {
     }
     updateCartProduct(row, action) {
         let cartProducts = this.state.cartProducts;
-        if (cartProducts.has(row)  ) {
+        if (cartProducts.has(row)) {
             if (action == 'add' && cartProducts.get(row).selectedAmount < row.stock) {
                 cartProducts.get(row).selectedAmount = cartProducts.get(row).selectedAmount + 1;
             } else if (action == 'minus') {
@@ -82,17 +88,17 @@ class Product extends Component {
         const onChange = (event) => {
             this.state.searchValue = event.target.value
         };
-    
+
         if (this.props.location.state != null && !this.state.login) {
-            this.state.user = this.props.location.state.user 
-            console.log(this.props.location.state.user)
+            this.state.user = this.props.location.state.user
             this.setState({
-                user : this.props.location.state.user,
+                user: this.props.location.state.user,
                 login: true
             })
-        }
-        if(this.state.user == null) {
-            return (window.location="./sign-in")
+        } 
+
+        if (this.state.user == null) {
+            return (window.location = "./sign-in")
         }
         return (
             <div>

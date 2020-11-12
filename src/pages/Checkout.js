@@ -86,6 +86,10 @@ class Checkout extends Component {
         return <AddressForm
           updateAddress={this.updateAddress.bind(this)}
           addressForm={this.state.addressForm}
+          {...this.props}
+          user={this.state.user}
+          cartProducts={this.state.cartProducts}
+
         />;
       case 1:
         return <Review
@@ -149,7 +153,7 @@ class Checkout extends Component {
                       })
                     }}
                   >
-                    Confirmar
+                    Volver al Inicio
                   </Button>
                 </React.Fragment>
               ) : (

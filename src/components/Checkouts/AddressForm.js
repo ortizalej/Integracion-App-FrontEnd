@@ -186,14 +186,33 @@ class AddressForm extends Component {
               </Select>
 
             </Grid>
-            <Button
-              fullWidth
-              variant="contained"
-              color="primary"
-              onClick={() => { this.updateAddress() }}
-            >
-              Siguiente
+            <Grid container spacing={3}>
+              <Grid item xs={12} sm={6}>
+                <Button
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  onClick={() => {
+                    this.props.history.push({
+                      pathname: '/products',
+                      state: { user: this.props.user, cartProducts: this.props.cartProducts }
+                    })
+                  }}
+                >
+                  Volver
               </Button>
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <Button
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  onClick={() => { this.updateAddress() }}
+                >
+                  Siguiente
+              </Button>
+              </Grid>
+            </Grid>
           </Grid>
         </React.Fragment>
       )

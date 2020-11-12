@@ -32,7 +32,7 @@ class Review extends Component {
       addressForm: this.props.addressForm,
       totalPrice: 0,
       totalWithDiscount: 0,
-      
+
 
     };
   }
@@ -65,7 +65,7 @@ class Review extends Component {
       "productDetails": productDetails,
       "delivered": false
     }
-    console.log(body)
+
     var auth = btoa('admin:123');
     axios.post('https://market-api-uade.herokuapp.com/api/v1/Sales/create', body, {
       headers: {
@@ -77,7 +77,26 @@ class Review extends Component {
     }
     ).then(response => {
       console.log('RESPONSE', response)
+      for (var i = 0; i < this.state.cartProductsList.length; i++) {
+        this.updateStock(this.state.cartProductsList[i])      
+      }
       this.finishSale()
+    })
+  }
+  updateStock(row) {
+    row.stock = row.stock - this.state.cartProducts.get(row).selectedAmount;
+    console.log(row)
+    var auth = btoa('admin:123');
+    axios.put('https://market-api-uade.herokuapp.com/api/v1/Products/update?id=' + row.id, row, {
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
+        'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token',
+        'Authorization': 'Basic ' + auth
+      }
+    }
+    ).then(response => {
+      console.log('RESPONSE', response)
     })
   }
   sumTotal() {
@@ -169,7 +188,6 @@ class Review extends Component {
               </Button>
             </Grid>
           </Grid>
-
         </Grid>
       </React.Fragment>
     )
