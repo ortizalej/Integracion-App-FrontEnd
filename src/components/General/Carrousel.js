@@ -11,7 +11,7 @@ export default function Carousel(props) {
             borderRadius: 20,
             //padding: '75px 50px',
             margin: '0px 30px',
-            width: '200px',
+            width: '300px',
             justifyContent: 'center',
             boxShadow: '10px 10px 10px black',
             display: 'flex',
