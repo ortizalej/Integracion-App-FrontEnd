@@ -22,11 +22,11 @@ class Home extends Component {
         return (
             <div>
 
-                <div style={{ paddingTop: 0 }} >
+                <div style={{ marginTop: 20 }} >
                     <div>
                         <img src={logo} width="100" align="left" />
                     </div>
-                    <Header user={this.state.user} {...this.props} style={{paddingTop: 10}}/>
+                    <Header user={this.state.user} {...this.props} style={{paddingTop: 20}}/>
                 </div>
                 <CarouselSlide />
                 <div>

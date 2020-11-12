@@ -30,18 +30,18 @@ class ProductEditor extends Component {
 
     render() {
         return (
-            <React.Fragment>
+            <React.Fragment >
                 <Table size="small">
                     <TableHead>
                         <TableRow>
                             <TableCell></TableCell>
-                            <TableCell>Producto</TableCell>
-                            <TableCell>Descripcion</TableCell>
-                            <TableCell>Precio</TableCell>
+                            <TableCell style={{fontWeight: 'bold'}}>Producto</TableCell>
+                            <TableCell style={{fontWeight: 'bold'}}>Descripcion</TableCell>
+                            <TableCell style={{fontWeight: 'bold'}}>Precio</TableCell>
                             <TableCell ></TableCell>
                         </TableRow>
                     </TableHead>
-                    <TableBody>
+                    <TableBody >
                         {this.props.products.map((row) => (
                             <TableRow key={row.id}>
                                 <TableCell><img src ={row.pictureUrl}  style={{width:60}} /></TableCell>

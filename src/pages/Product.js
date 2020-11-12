@@ -103,7 +103,7 @@ class Product extends Component {
         return (
             <div>
 
-                <div style={{ marginTop: 60 }} >
+                <div style={{ marginTop: 20 }} >
                     <div>
                         <img src={logo} width="100" align="left" />
 
