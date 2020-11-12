@@ -19,6 +19,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { adminListItems } from '../components/Forms/listItems';
 import Orders from '../components/Sales/Orders';
+import Button from '@material-ui/core/Button';
 
 function Copyright() {
   return (
@@ -142,6 +143,17 @@ export default function Dashboard() {
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
             Ordenes de compra
           </Typography>
+          <Link>
+            <Button
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+              onClick={() => { window.location.href = '/sign-in' }}
+            >
+              Cerrar Sesion
+              </Button>
+          </Link>
         </Toolbar>
       </AppBar>
       <Drawer

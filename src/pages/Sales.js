@@ -20,6 +20,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { dispatcherListItems } from '../components/Forms/listItems';
 import SalesABM from '../components/Sales/SalesABM';
 import axios from 'axios';
+import Button from '@material-ui/core/Button';
 
 function Copyright() {
   return (
@@ -164,7 +165,17 @@ class Sales extends Component {
             <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
               Administrador de Ordenes
           </Typography>
-
+            <Link>
+              <Button
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.submit}
+                onClick={() => { window.location.href = '/sign-in' }}
+              >
+                Cerrar Sesion
+              </Button>
+            </Link>
           </Toolbar>
         </AppBar>
         <Drawer

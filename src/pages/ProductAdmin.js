@@ -19,6 +19,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { productListItems } from '../components/Forms/listItems';
 import ProductsABM from '../components/Products/ProductsABM';
+import Button from '@material-ui/core/Button';
 
 function Copyright() {
   return (
@@ -162,7 +163,17 @@ class ProductAdmin extends Component {
             <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
               Administrador de Productos
           </Typography>
-
+            <Link>
+              <Button
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.submit}
+                onClick={() => { window.location.href = '/sign-in' }}
+              >
+                Cerrar Sesion
+              </Button>
+            </Link>
           </Toolbar>
         </AppBar>
         <Drawer

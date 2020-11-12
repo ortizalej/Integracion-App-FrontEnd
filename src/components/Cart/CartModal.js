@@ -131,7 +131,7 @@ class CartModal extends Component {
                         onClick={() => {
                             this.props.history.push({
                                 pathname: '/checkout',
-                                state: { cartProducts: this.state.cartProducts }
+                                state: { cartProducts: this.state.cartProducts, user: this.props.user }
                             })
                         }}
                     >

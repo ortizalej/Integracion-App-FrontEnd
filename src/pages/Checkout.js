@@ -56,7 +56,8 @@ class Checkout extends Component {
     this.state = {
       activeStep: 0,
       cartProducts: this.props.location.state.cartProducts,
-      addressForm: null
+      addressForm: null,
+      user:this.props.location.state.user
     };
   }
 
@@ -136,6 +137,20 @@ class Checkout extends Component {
                   <Typography variant="h5" gutterBottom>
                     Gracias por su compra
                 </Typography>
+                  <Button
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                    className={classes.submit}
+                    onClick={() => {
+                      this.props.history.push({
+                        pathname: '/products',
+                        state: { user: this.state.user }
+                      })
+                    }}
+                  >
+                    Confirmar
+                  </Button>
                 </React.Fragment>
               ) : (
                   <React.Fragment>

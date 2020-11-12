@@ -85,6 +85,7 @@ class Product extends Component {
     
         if (this.props.location.state != null && !this.state.login) {
             this.state.user = this.props.location.state.user 
+            console.log(this.props.location.state.user)
             this.setState({
                 user : this.props.location.state.user,
                 login: true

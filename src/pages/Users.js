@@ -20,6 +20,8 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { RRHHListItems } from '../components/Forms/listItems';
 import UsersABM from '../components/User/UsersABM';
 import axios from 'axios';
+import Button from '@material-ui/core/Button';
+
 const drawerWidth = 240;
 
 const classes = theme => ({
@@ -168,7 +170,17 @@ class Users extends Component {
             <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
               Administrador de Usuarios
           </Typography>
-
+            <Link>
+              <Button
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.submit}
+                onClick={() => { window.location.href = '/sign-in' }}
+              >
+                Cerrar Sesion
+              </Button>
+            </Link>
           </Toolbar>
         </AppBar>
         <Drawer
@@ -195,7 +207,7 @@ class Users extends Component {
               {/* Recent Orders */}
               <Grid item xs={12}>
                 <Paper className={classes.paper}>
-                  <UsersABM  />
+                  <UsersABM />
                 </Paper>
               </Grid>
             </Grid>
