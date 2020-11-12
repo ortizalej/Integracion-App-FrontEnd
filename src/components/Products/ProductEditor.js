@@ -34,6 +34,7 @@ class ProductEditor extends Component {
                 <Table size="small">
                     <TableHead>
                         <TableRow>
+                            <TableCell></TableCell>
                             <TableCell>Producto</TableCell>
                             <TableCell>Descripcion</TableCell>
                             <TableCell>Precio</TableCell>
@@ -43,6 +44,7 @@ class ProductEditor extends Component {
                     <TableBody>
                         {this.props.products.map((row) => (
                             <TableRow key={row.id}>
+                                <TableCell><img src ={row.pictureUrl}  style={{width:60}} /></TableCell>
                                 <TableCell>{row.productName}</TableCell>
                                 <TableCell>{row.description}</TableCell>
                                 <TableCell>{row.price}</TableCell>
