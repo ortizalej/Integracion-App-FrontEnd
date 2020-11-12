@@ -122,7 +122,7 @@ class Review extends Component {
         <List disablePadding>
           {this.state.cartProductsList.map((product) => (
             <ListItem className={classes.listItem} key={product.name}>
-              <ListItemText primary={product.productName} secondary={product.discountRate} />
+              <ListItemText primary={product.productName} />
               <Typography variant="body2">{product.price}</Typography>
             </ListItem>
           ))}
