@@ -98,7 +98,6 @@ class FacturacionViewer extends Component {
               <TableCell>Numero de Venta</TableCell>
               <TableCell>Metodo de Pago</TableCell>
               <TableCell>Total</TableCell>
-              <TableCell>Total con descuento</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -108,7 +107,6 @@ class FacturacionViewer extends Component {
                 <TableCell>{row.id}</TableCell>
                 <TableCell>{row.paymentMethod}</TableCell>
                 <TableCell>{row.total}</TableCell>
-                <TableCell>{row.totalWithDiscount}</TableCell>
               </TableRow>
             ))}
           </TableBody>
