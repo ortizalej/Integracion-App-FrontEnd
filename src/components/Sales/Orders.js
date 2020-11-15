@@ -49,7 +49,7 @@ class Orders extends Component {
     }
     return (
       <React.Fragment>
-        <Title>Ordenes de compra</Title>
+        <Title>Ordenes de venta</Title>
         <Table size="small">
           <TableHead>
             <TableRow>

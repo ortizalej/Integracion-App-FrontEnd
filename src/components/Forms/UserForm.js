@@ -230,7 +230,7 @@ class UserForm extends Component {
                 <CssBaseline />
                 <div className={classes.paper}>
                     <Typography component="h1" variant="h5">
-                        Usuario
+                        Empleado
         </Typography>
                     <form className={classes.form} noValidate>
                         <TextField
@@ -268,8 +268,8 @@ class UserForm extends Component {
                             margin="normal"
                             required
                             fullWidth
-                            name="Usuario"
-                            label="Usuario"
+                            name="Empleado"
+                            label="Empleado"
                             type="text"
                             id="UserName"
                             value={this.state.userName}

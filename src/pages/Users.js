@@ -168,7 +168,7 @@ class Users extends Component {
               <MenuIcon />
             </IconButton>
             <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-              Administrador de Usuarios
+              Administrador de Empleados
           </Typography>
             <Link>
               <Button

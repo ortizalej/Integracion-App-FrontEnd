@@ -138,9 +138,9 @@ class UsersABM extends Component {
         }
         return (
             <React.Fragment>
-                <Title>Usuarios</Title>
+                <Title>Empleados</Title>
                 <Button variant="outlined" size="small" color="primary" onClick={() => { this.handleOpen({}, 'new') }}>
-                    Nuevo Usuario
+                    Nuevo Empleado
             </Button>
                 <Table size="small">
                     <TableHead>
