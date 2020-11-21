@@ -6,6 +6,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Select from '@material-ui/core/Select';
+
 class AddressForm extends Component {
   constructor(props) {
     super(props);
@@ -170,7 +171,7 @@ class AddressForm extends Component {
 
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            { /*<Grid item xs={12} sm={6}>
               <Select
                 native
                 value={this.state.paymentMethod}
@@ -185,7 +186,7 @@ class AddressForm extends Component {
                 <option value={'Credito'}>Tarjeta Credito</option>
               </Select>
 
-            </Grid>
+            </Grid> */}
             <Grid container spacing={3}>
               <Grid item xs={12} sm={6}>
                 <Button
