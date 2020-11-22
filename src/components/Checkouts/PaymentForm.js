@@ -8,6 +8,9 @@ import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
 import CreditForm from '../Checkouts/CreditForm';
 import DebitForm from '../Checkouts/DebitForm';
+import { Snackbar } from '@material-ui/core';
+
+
 
 class PaymentForm extends Component {
   constructor(props) {
@@ -22,7 +25,22 @@ class PaymentForm extends Component {
   }
   updateCbu(cbu){
     this.setState({
-      cbu: this.cbu
+      cbu: cbu
+    })
+  }
+  updateCardNumber(cardNumber){
+    this.setState({
+      cardNumber: cardNumber
+    })
+  }
+  updateCvv(cvv){
+    this.setState({
+      cvv: cvv
+    })
+  }
+  updatePays(pays){
+    this.setState({
+      pays: pays
     })
   }
   updatePayment() {
@@ -33,6 +51,7 @@ class PaymentForm extends Component {
       cvv: this.state.cvv,
       pays: this.state.pays,
     }
+    console.log(paymentForm);
     this.props.updatePayment(paymentForm)
   }
 
@@ -79,7 +98,12 @@ class PaymentForm extends Component {
       
       <div style={{height:'20px'}}/>
 
-      {this.state.paymentMethod === 'Credito' && <CreditForm paymentForm={this.state} /> }
+      {this.state.paymentMethod === 'Credito' && <CreditForm 
+                                                    updateCardNumber={this.updateCardNumber.bind(this)}
+                                                    updateCvv={this.updateCvv.bind(this)}
+                                                    updatePays={this.updatePays.bind(this)}
+                                                    paymentForm={this.state} 
+                                                  /> }
 
       {this.state.paymentMethod === 'Efectivo' &&
         <Grid style={{height:'40px', marginTop:'15px'}} item xs={12} md={12}>
@@ -89,8 +113,8 @@ class PaymentForm extends Component {
 
       {this.state.paymentMethod === 'Debito' && <DebitForm 
                                                     updateCbu={this.updateCbu.bind(this)} 
-                                                    paymentForm={this.state.cbu}/> 
-                                                  }
+                                                    paymentForm={this.state.cbu}
+                                                  /> }
 
       <div style={{height:'30px'}}/>
 

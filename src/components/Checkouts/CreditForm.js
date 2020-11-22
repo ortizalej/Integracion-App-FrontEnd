@@ -17,22 +17,25 @@ class CreditForm extends Component {
         };
     }
 
-    handleChangeCardNumber = (event) => {
-        this.setState({
+    handleChangeCardNumber = async function(event){
+        await this.setState({
             cardNumber: event.target.value
         })
+        this.props.updateCardNumber(this.state.cardNumber)
     };
 
-    handleChangeCvv = (event) => {
-        this.setState({
+    handleChangeCvv = async function(event){
+        await this.setState({
             cvv: event.target.value
         })
+        this.props.updateCvv(this.state.cvv)
     };
 
-    handleChangePays = (event) => {
-        this.setState({
-          pays: event.target.value
+    handleChangePays = async function(event){
+        await this.setState({
+            pays: event.target.value
         })
+        this.props.updatePays(this.state.pays)
     };
 
     render() {
@@ -43,11 +46,12 @@ class CreditForm extends Component {
                     <Grid item xs={12} md={6}>
                         <TextField 
                             required id="cardNumber" 
-                            label="Nunmero de la tarjeta" 
+                            label="Numero de la tarjeta" 
                             fullWidth 
                             autoComplete="cc-name"
                             value={this.state.cardNumber}
-                            onChange={this.handleChangeCardNumber}
+                            //onChange={this.handleChangeCardNumber}
+                            onChange={(e) => {this.handleChangeCardNumber(e)}}
                         />
                     </Grid>
 
@@ -65,19 +69,20 @@ class CreditForm extends Component {
                         </Grid>*/}
                     <Grid item xs={12} md={6}>
                         <TextField
-                            required
-                            id="cvv"
+                            required id="cvv"
                             label="CVV"
                             fullWidth
                             autoComplete="cc-csc"
                             value={this.state.cvv}
-                            onChange={this.handleCvv}
+                            //onChange={this.handleChangeCvv}
+                            onChange={(e) => {this.handleChangeCvv(e)}}
                         />
 
                         <Select
                             native
                             value={this.state.pays}
-                            onChange={this.handleChangePays}
+                            //onChange={this.handleChangePays}
+                            onChange={(e) => {this.handleChangePays(e)}}
                             fullWidth
                             id="pays"
                         >

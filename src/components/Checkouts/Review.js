@@ -63,7 +63,7 @@ class Review extends Component {
       "total": this.state.totalPrice,
       "totalWithDiscount": this.state.totalWithDiscount,
       "userDni": "string",
-      //"paymentMethod": this.state.addressForm.paymentMethod,
+      "paymentMethod": this.state.paymentForm.paymentMethod,
       "productDetails": productDetails,
       "delivered": false
     }
@@ -165,13 +165,20 @@ class Review extends Component {
         <Typography variant="h6" gutterBottom className={classes.title}>
             Detalles de Pago
           </Typography>
-          <Grid container>
+          <Grid container spacing={2}>
               <React.Fragment >
-                <Grid item>
+                <Grid item item xs={12} sm={12}>
+                  <Typography gutterBottom>Metodo de Pago: {this.state.paymentForm.paymentMethod}</Typography>
+                  
+                  { this.state.paymentForm.paymentMethod === 'Debito' && 
+                    <Typography gutterBottom>CBU: {this.state.paymentForm.cbu}</Typography> }
 
-                  {/*{this.paymentForm.paymentMethod === 'Debito' && */}
-                  <Typography gutterBottom>Metodo de Pago: {this.state.paymentForm.paymentMethod}</Typography> 
-                  <Typography gutterBottom>CBU: {this.state.paymentForm.cbu}</Typography>
+                  { this.state.paymentForm.paymentMethod === 'Credito' && 
+                    <Typography gutterBottom>Nro Tarjeta: {this.state.paymentForm.cardNumber}</Typography>}
+                    
+                  { this.state.paymentForm.paymentMethod === 'Credito' && 
+                    <Typography gutterBottom>Cuotas: {this.state.paymentForm.pays}</Typography>}
+
                 </Grid>
               </React.Fragment>
             

@@ -15,14 +15,13 @@ class DebitForm extends Component {
         };
     }
 
-    
-
-    handleChangeCbu = (event) => {
-        this.setState({
+    handleChangeCbu = async function(event){
+        await this.setState({
             cbu: event.target.value
         })
         this.props.updateCbu(this.state.cbu)
     };
+    
 
     render() {
 
@@ -36,7 +35,8 @@ class DebitForm extends Component {
                             fullWidth 
                             autoComplete="cc-name"
                             value={this.state.cbu}
-                            onChange={this.handleChangeCbu} 
+                            //onChange={this.handleChangeCbu} 
+                            onChange={(e) => {this.handleChangeCbu(e)}}
                         />
                     </Grid>
                     {/* 
