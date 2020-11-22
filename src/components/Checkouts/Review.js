@@ -21,6 +21,7 @@ const classes = theme => ({
   },
   title: {
     marginTop: theme.spacing(2),
+    
   },
 });
 class Review extends Component {
@@ -30,6 +31,7 @@ class Review extends Component {
       cartProducts: this.props.cartProducts,
       cartProductsList: Array.from(this.props.cartProducts.keys()),
       addressForm: this.props.addressForm,
+      paymentForm: this.props.paymentForm,
       totalPrice: 0,
       totalWithDiscount: 0,
 
@@ -61,7 +63,7 @@ class Review extends Component {
       "total": this.state.totalPrice,
       "totalWithDiscount": this.state.totalWithDiscount,
       "userDni": "string",
-      "paymentMethod": this.state.addressForm.paymentMethod,
+      //"paymentMethod": this.state.addressForm.paymentMethod,
       "productDetails": productDetails,
       "delivered": false
     }
@@ -140,8 +142,6 @@ class Review extends Component {
             <Typography variant="h6" gutterBottom className={classes.title}>
               Datos de envio
           </Typography>
-            <Typography gutterBottom>Metodo de Pago: {this.state.addressForm.paymentMethod}</Typography>
-
             <Typography gutterBottom>Nombre: {this.state.addressForm.name} {this.state.addressForm.lastName}</Typography>
             <Typography gutterBottom>Direccion: {[this.state.addressForm.address, this.state.addressForm.address2].join(', ')}</Typography>
           </Grid>
@@ -161,6 +161,21 @@ class Review extends Component {
               </React.Fragment>
             ))}
           </Grid> */}
+
+        <Typography variant="h6" gutterBottom className={classes.title}>
+            Detalles de Pago
+          </Typography>
+          <Grid container>
+              <React.Fragment >
+                <Grid item>
+
+                  {/*{this.paymentForm.paymentMethod === 'Debito' && */}
+                  <Typography gutterBottom>Metodo de Pago: {this.state.paymentForm.paymentMethod}</Typography> 
+                  <Typography gutterBottom>CBU: {this.state.paymentForm.cbu}</Typography>
+                </Grid>
+              </React.Fragment>
+            
+          </Grid>
 
           </Grid>
 

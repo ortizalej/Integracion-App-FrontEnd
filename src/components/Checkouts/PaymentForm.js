@@ -6,22 +6,53 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
+import CreditForm from '../Checkouts/CreditForm';
+import DebitForm from '../Checkouts/DebitForm';
 
 class PaymentForm extends Component {
   constructor(props) {
     super(props);
-    this.state = {     
+    this.state = {
+      paymentMethod: null,
+      cbu:"",
+      cardNumber: "",
+      cvv: "",
+      pays: "",
     };
+  }
+  updateCbu(cbu){
+    this.setState({
+      cbu: this.cbu
+    })
+  }
+  updatePayment() {
+    let paymentForm = {
+      paymentMethod: this.state.paymentMethod,
+      cbu: this.state.cbu,
+      cardNumber: this.state.cardNumber,
+      cvv: this.state.cvv,
+      pays: this.state.pays,
+    }
+    this.props.updatePayment(paymentForm)
   }
 
   handleChangePaymentMethod = (event) => {
     this.setState({
       paymentMethod: event.target.value
+
     })
   };
 
+  goBack() {
+    this.props.goBack()
+  }
+
+  goNext() {
+    this.props.goNext()
+  }
+
   render() {
-    const value = "";//[ 'Credito', 'Debito', 'Efectivo'];
+    const value = "";
   return (
     (
 
@@ -46,86 +77,22 @@ class PaymentForm extends Component {
 
       </Grid>
       
-      {this.state.paymentMethod === 'Credito' && 
-      <Grid container spacing={3}>
-        <Grid item xs={12} md={6}>
-          <TextField required id="cardName" label="Nunmero de la tarjeta" fullWidth autoComplete="cc-name" />
+      <div style={{height:'20px'}}/>
+
+      {this.state.paymentMethod === 'Credito' && <CreditForm paymentForm={this.state} /> }
+
+      {this.state.paymentMethod === 'Efectivo' &&
+        <Grid style={{height:'40px', marginTop:'15px'}} item xs={12} md={12}>
+          <div>"El pago en Efectivo se realizara contraentrega" </div>
         </Grid>
-
-        {/*<Grid item xs={12} md={6}>
-          <TextField
-            required
-            id="cardNumber"
-            label="Numero de tarjeta"
-            fullWidth
-            autoComplete="cc-number"
-        /> 
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <TextField required id="expDate" label="Fecha de expiracion" fullWidth autoComplete="cc-exp" />
-        </Grid>*/}
-        <Grid item xs={12} md={6}>
-          <TextField
-            required
-            id="cvv"
-            label="CVV"
-            fullWidth
-            autoComplete="cc-csc"
-          />
-
-        <Select
-          native
-          //value={this.state.paymentMethod}
-          //onChange={this.handleChangePaymentMethod}
-          fullWidth
-          id="pays"
-          
-        >
-          <option aria-label="None" value="" > Cuotas</option>
-          <option value={'1'}>1</option>
-          <option value={'3'}>3</option>
-          <option value={'12'}>12</option>
-        </Select>
-    </Grid> 
-
-    </Grid> }
-    
-    {this.state.paymentMethod === 'Efectivo' &&
-      
-      <Grid style={{height:'50px', }} item xs={12} md={12}>
-         <div>"El pago en Efectivo se realizara contraentrega" </div>
-      </Grid>
       }
 
-    {this.state.paymentMethod === 'Debito' && 
-      <Grid container spacing={3}>
-        <Grid item xs={12} md={6}>
-          <TextField required id="cbu" label="CBU" fullWidth autoComplete="cc-name" />
-        </Grid>
-        {/* <Grid item xs={12} md={6}>
-          <TextField
-            required
-            id="cardNumber"
-            label="Numero de tarjeta"
-            fullWidth
-            autoComplete="cc-number"
-          />
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <TextField required id="expDate" label="Fecha de expiracion" fullWidth autoComplete="cc-exp" />
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <TextField
-            required
-            id="cvv"
-            label="CVV"
-            fullWidth
-            autoComplete="cc-csc"
-          />
-    </Grid> */}
+      {this.state.paymentMethod === 'Debito' && <DebitForm 
+                                                    updateCbu={this.updateCbu.bind(this)} 
+                                                    paymentForm={this.state.cbu}/> 
+                                                  }
 
-    </Grid> }
-
+      <div style={{height:'30px'}}/>
 
       <Grid container spacing={3}>
         <Grid item xs={12} sm={6}>
@@ -133,8 +100,7 @@ class PaymentForm extends Component {
                 fullWidth
                 variant="contained"
                 color="primary"
-                //onClick={() => { this.goBack() }}
-
+                onClick={() => { this.goBack() }}
               >
                 Atras
               </Button>
@@ -144,15 +110,12 @@ class PaymentForm extends Component {
             fullWidth
             variant="contained"
             color="primary"
-            //onClick={() => { this.goNext() }}
+            onClick={() => { this.updatePayment() }}
           >
             Siguiente
               </Button>
         </Grid>
       </Grid>
-
-
-
     </React.Fragment>
   ));
 }

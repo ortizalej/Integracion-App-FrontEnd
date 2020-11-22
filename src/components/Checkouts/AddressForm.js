@@ -70,7 +70,7 @@ class AddressForm extends Component {
       city: this.state.city,
       province: this.state.province,
       zipcode: this.state.zipcode,
-      paymentMethod: this.state.paymentMethod
+      //paymentMethod: this.state.paymentMethod
     }
     this.props.updateAddress(addressForm)
   }

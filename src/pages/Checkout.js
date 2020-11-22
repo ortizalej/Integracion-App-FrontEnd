@@ -58,6 +58,7 @@ class Checkout extends Component {
       activeStep: 0,
       cartProducts: this.props.location.state.cartProducts,
       addressForm: null,
+      paymentForm:null,
       user:this.props.location.state.user
     };
   }
@@ -70,6 +71,13 @@ class Checkout extends Component {
     })
 
   }
+  updatePayment(payment) {
+    this.setState({
+      paymentForm: payment,
+      activeStep: this.state.activeStep + 1
+    })
+
+  }
   finishSale() {
     this.setState({
       activeStep: 3
@@ -77,16 +85,16 @@ class Checkout extends Component {
   }
   goBack() {
     this.setState({
-      activeStep: 0
+      activeStep: this.state.activeStep - 1
     })
-
   }
+  
   goNext() {
     this.setState({
-      activeStep: 3
+      activeStep: this.state.activeStep + 1
     })
-
   }
+
   getStepContent(step) {
     switch (step) {
       case 0:
@@ -96,18 +104,22 @@ class Checkout extends Component {
           {...this.props}
           user={this.state.user}
           cartProducts={this.state.cartProducts}
-
         />;
       case 1:
         return <PaymentForm
+        updateAddress={this.updateAddress.bind(this)}
+        updatePayment={this.updatePayment.bind(this)}
         goBack={this.goBack.bind(this)}
-       
-        
+        goNext={this.goNext.bind(this)}
+        cartProducts={this.state.cartProducts}
+        addressForm={this.state.addressForm}
+        paymentForm={this.state.paymentForm}
         />;
       case 2:
         return <Review
           cartProducts={this.state.cartProducts}
           addressForm={this.state.addressForm}
+          paymentForm={this.state.paymentForm}
           goBack={this.goBack.bind(this)}
           finishSale={this.finishSale.bind(this)}
         />;
