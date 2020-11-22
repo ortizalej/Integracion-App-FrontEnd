@@ -107,7 +107,6 @@ class Checkout extends Component {
         />;
       case 1:
         return <PaymentForm
-        updateAddress={this.updateAddress.bind(this)}
         updatePayment={this.updatePayment.bind(this)}
         goBack={this.goBack.bind(this)}
         goNext={this.goNext.bind(this)}
