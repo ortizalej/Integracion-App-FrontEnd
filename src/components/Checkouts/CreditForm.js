@@ -7,6 +7,20 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
 
+const validCVVRegex = RegExp(
+    /^[0-9]{3}$/
+  );
+
+const validCreditCardRegex = RegExp(
+    /^[0-9]{16}$/
+  );
+
+  const validateForm = errors => {
+    let valid = true;
+    Object.values(errors).forEach(val => val.length > 0 && (valid = false));
+    return valid;
+  };
+
 class CreditForm extends Component {
     constructor(props) {
         super(props);
@@ -14,10 +28,14 @@ class CreditForm extends Component {
             cardNumber: this.props.paymentForm.cardNumber,
             cvv: this.props.paymentForm.cvv,
             pays: this.props.paymentForm.pays,
+            errors: {
+                cardNumber: '',
+                cvv:'',
+              }
         };
     }
 
-    handleChangeCardNumber = async function(event){
+    /*handleChangeCardNumber = async function(event){
         await this.setState({
             cardNumber: event.target.value
         })
@@ -29,6 +47,60 @@ class CreditForm extends Component {
             cvv: event.target.value
         })
         this.props.updateCvv(this.state.cvv)
+    };*/
+
+    handleChangeCardNumber = async function(event){
+        event.preventDefault();
+        const { name, value } = event.target;
+        let errors = this.state.errors;
+        
+        await this.setState({
+            cardNumber: event.target.value
+        })
+        errors.cardNumber = 
+        validCreditCardRegex.test(value) 
+            ? ''
+            : 'El numero de la Tarjeta no es válido.';
+            this.setState({
+                cardNumber: event.target.value
+            })
+
+            if(validateForm(this.state.errors)) {
+                //console.info('Valid Form')
+                this.props.updateCardNumber(this.state.cardNumber)
+              }else{
+                //console.error('Invalid Form')
+                //this.props.updateCbu(this.state.cbu, 0)
+              }
+
+        
+    };
+
+    handleChangeCvv = async function(event){
+        event.preventDefault();
+        const { name, value } = event.target;
+        let errors = this.state.errors;
+        
+        await this.setState({
+            cvv: event.target.value
+        })
+        errors.cvv = 
+        validCVVRegex.test(value) 
+            ? ''
+            : 'El código verificador no es válido.';
+            this.setState({
+                cvv: event.target.value
+            })
+
+            if(validateForm(this.state.errors)) {
+                //console.info('Valid Form')
+                this.props.updateCvv(this.state.cvv)
+              }else{
+                //console.error('Invalid Form')
+                //this.props.updateCbu(this.state.cbu, 0)
+              }
+
+        
     };
 
     handleChangePays = async function(event){
@@ -53,6 +125,8 @@ class CreditForm extends Component {
                             //onChange={this.handleChangeCardNumber}
                             onChange={(e) => {this.handleChangeCardNumber(e)}}
                         />
+                        {this.state.errors.cardNumber.length > 0 && 
+                        <span className='error'>{this.state.errors.cardNumber}</span>}
                     </Grid>
 
                     {/*<Grid item xs={12} md={6}>
@@ -77,6 +151,8 @@ class CreditForm extends Component {
                             //onChange={this.handleChangeCvv}
                             onChange={(e) => {this.handleChangeCvv(e)}}
                         />
+                        {this.state.errors.cvv.length > 0 && 
+                        <span className='error'>{this.state.errors.cvv}</span>}
                     </Grid>
 
                     <React.Fragment >

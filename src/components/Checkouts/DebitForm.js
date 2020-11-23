@@ -7,19 +7,53 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
 
+const validCBURegex = RegExp(
+    /^[0-9]{22}$/
+  );
+
+const validateForm = errors => {
+    let valid = true;
+    Object.values(errors).forEach(val => val.length > 0 && (valid = false));
+    return valid;
+  };
+
 class DebitForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
             cbu: this.props.paymentForm.cbu,
+            errors: {
+                cbu: '',
+              }
         };
     }
 
     handleChangeCbu = async function(event){
+        event.preventDefault();
+        const { name, value } = event.target;
+        let errors = this.state.errors;
+
         await this.setState({
             cbu: event.target.value
         })
-        this.props.updateCbu(this.state.cbu)
+
+        errors.cbu = 
+        validCBURegex.test(value) 
+            ? ''
+            : 'El CBU no es válido.';
+            this.setState({
+                cbu: event.target.value
+            })
+
+            if(validateForm(this.state.errors)) {
+                //console.info('Valid Form')
+                this.props.updateCbu(this.state.cbu)
+              }else{
+                //console.error('Invalid Form')
+                //this.props.updateCbu(this.state.cbu, 0)
+              }
+
+        
     };
     
 
@@ -37,7 +71,10 @@ class DebitForm extends Component {
                             value={this.state.cbu}
                             //onChange={this.handleChangeCbu} 
                             onChange={(e) => {this.handleChangeCbu(e)}}
+                            noValidate
                         />
+                        {this.state.errors.cbu.length > 0 && 
+                        <span className='error'>{this.state.errors.cbu}</span>}
                     </Grid>
                     {/* 
                     <Grid item xs={12} md={6}>

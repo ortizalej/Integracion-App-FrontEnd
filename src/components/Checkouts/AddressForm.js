@@ -177,10 +177,10 @@ class AddressForm extends Component {
     }
 
     if(validateForm(this.state.errors)) {
-      console.info('Valid Form')
+      //console.info('Valid Form')
       this.props.updateAddress(addressForm)
     }else{
-      console.error('Invalid Form')
+      //console.error('Invalid Form')
     }
    
   }
