@@ -77,7 +77,12 @@ class CreditForm extends Component {
                             //onChange={this.handleChangeCvv}
                             onChange={(e) => {this.handleChangeCvv(e)}}
                         />
+                    </Grid>
 
+                    <React.Fragment >
+                        <Grid item xs={3} sm={3}>
+                        <Typography gutterBottom>Cuotas:</Typography>
+                     
                         <Select
                             native
                             value={this.state.pays}
@@ -85,14 +90,15 @@ class CreditForm extends Component {
                             onChange={(e) => {this.handleChangePays(e)}}
                             fullWidth
                             id="pays"
+                            
                         >
-                            <option aria-label="None" value="" > Cuotas</option>
-                            <option value={'1'}>1</option>
+                            
+                            <option style={{textAlign:'center'}} value={'1'}>1</option>
                             <option value={'3'}>3</option>
                             <option value={'12'}>12</option>
                         </Select>
-                    </Grid>
-
+                        </Grid>
+                        </React.Fragment>
                 </Grid>
 
 
