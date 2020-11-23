@@ -145,3 +145,9 @@ textarea::placeholder {
     transform: rotate(360deg);
   }
 }
+
+.error {
+  color: red; 
+  font-size: 1;
+  display: relative;
+}
