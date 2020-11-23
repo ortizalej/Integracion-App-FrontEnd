@@ -82,8 +82,8 @@ class FacturacionViewer extends Component {
             id="paymentMethod"
           >
             <option value={''}>Todos</option>
-            <option value={'Débito'}>Débito</option>
-            <option value={'Crédito'}>Crédito</option>
+            <option value={'Debito'}>Debito</option>
+            <option value={'Credito'}>Credito</option>
             <option value={'Efectivo'}>Efectivo</option>
           </Select>
           :

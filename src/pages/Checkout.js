@@ -12,6 +12,7 @@ import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
 import AddressForm from '../components/Checkouts/AddressForm';
 import Review from '../components/Checkouts/Review';
+import PaymentForm from '../components/Checkouts/PaymentForm';
 
 const classes = theme => ({
   appBar: {
@@ -57,6 +58,7 @@ class Checkout extends Component {
       activeStep: 0,
       cartProducts: this.props.location.state.cartProducts,
       addressForm: null,
+      paymentForm:null,
       user:this.props.location.state.user
     };
   }
@@ -69,17 +71,30 @@ class Checkout extends Component {
     })
 
   }
+  updatePayment(payment) {
+    this.setState({
+      paymentForm: payment,
+      activeStep: this.state.activeStep + 1
+    })
+
+  }
   finishSale() {
     this.setState({
-      activeStep: 2
+      activeStep: 3
     })
   }
   goBack() {
     this.setState({
-      activeStep: 0
+      activeStep: this.state.activeStep - 1
     })
-
   }
+  
+  goNext() {
+    this.setState({
+      activeStep: this.state.activeStep + 1
+    })
+  }
+
   getStepContent(step) {
     switch (step) {
       case 0:
@@ -89,12 +104,21 @@ class Checkout extends Component {
           {...this.props}
           user={this.state.user}
           cartProducts={this.state.cartProducts}
-
         />;
       case 1:
+        return <PaymentForm
+        updatePayment={this.updatePayment.bind(this)}
+        goBack={this.goBack.bind(this)}
+        goNext={this.goNext.bind(this)}
+        cartProducts={this.state.cartProducts}
+        addressForm={this.state.addressForm}
+        paymentForm={this.state.paymentForm}
+        />;
+      case 2:
         return <Review
           cartProducts={this.state.cartProducts}
           addressForm={this.state.addressForm}
+          paymentForm={this.state.paymentForm}
           goBack={this.goBack.bind(this)}
           finishSale={this.finishSale.bind(this)}
         />;
@@ -110,7 +134,7 @@ class Checkout extends Component {
     this.setState({ activeStep: this.state.activeStep - 1 })
   };
   render() {
-    const steps = ['Datos de envio', 'Verifica tu orden'];
+    const steps = ['Datos de envio', 'Metodo de Pago', 'Verifica tu orden'];
 
     const { classes } = this.props;
     return (

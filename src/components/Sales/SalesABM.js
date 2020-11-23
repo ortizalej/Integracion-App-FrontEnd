@@ -10,12 +10,18 @@ import Title from '../Title';
 import axios from 'axios';
 import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
-
+import TextField from '@material-ui/core/TextField';
 
 const classes = theme => ({
     seeMore: {
         marginTop: theme.spacing(3),
     },
+    title: {
+        fontWeight: 'bold',
+    },
+    detail: {
+        color:'blue',
+    }
 });
 class SalesABM extends Component {
     constructor(props) {
@@ -92,17 +98,32 @@ class SalesABM extends Component {
                 <Table size="small">
                     <TableHead>
                         <TableRow>
-                            <TableCell>Numero de Orden</TableCell>
-                            <TableCell>Precio Total</TableCell>
-                            <TableCell>Entregado</TableCell>
-                            <TableCell></TableCell>
+                            <TableCell className={classes.title}>Numero de Orden</TableCell>
+                            <TableCell className={classes.title}>Detalle</TableCell>
+                            <TableCell className={classes.title}>Precio Total</TableCell>
+                            <TableCell className={classes.title}>Transaccion</TableCell>
+                            <TableCell className={classes.title}>Entregado</TableCell>
+                            <TableCell className={classes.title}></TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {this.state.masterOrders.map((row) => (
                             <TableRow key={row.id}>
                                 <TableCell>{row.id}</TableCell>
+                                <TableCell className={classes.detail}>Ver</TableCell>
                                 <TableCell>{row.total}</TableCell>
+                                <TableCell>
+                                            <TextField
+                                                required
+                                                id="trans"
+                                                name="Transaccion"
+                                                label="Nro Transaccion"
+                                                fullWidth
+                                                autoComplete="given-name"
+                                                //value=""{this.state.name}""
+                                                //onChange={this.handleChange}
+                                                noValidate
+                                            /></TableCell>
                                 <TableCell>
                                     <Checkbox
                                         checked={row.delivered}
