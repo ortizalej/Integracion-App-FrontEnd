@@ -21,7 +21,7 @@ const classes = theme => ({
   },
   title: {
     marginTop: theme.spacing(2),
-    
+
   },
 });
 class Review extends Component {
@@ -37,6 +37,50 @@ class Review extends Component {
 
 
     };
+  }
+  confirm() {
+    if (this.state.paymentForm.paymentMethod == "Credito") {
+      this.sendCard();
+    } else if (this.state.paymentForm.paymentMethod == "Debito") {
+      this.sendBank();
+    }
+  }
+  sendCard(body) {
+    body = {
+      "amount": this.state.paymentForm.totalPrice,
+      "creditNumber": this.state.paymentForm.cardNumber,
+      "monthPays": this.state.paymentForm.pays,
+      "productWithDiscount": false,
+      "secretCode": 611,
+      "shopName": "Super A"
+    }
+    console.log('BODY', body)
+
+    axios.post('https://uade-financial-entity.herokuapp.com/financial_entity/api/purchase', body, {
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
+        'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token'
+      }
+    }
+    ).then(response => console.log(response))
+  }
+  sendBank() {
+    let body = {
+      "amount": this.state.totalPrice,
+      "cbu": this.state.paymentForm.cbu,
+      "provider_code": "042036"
+    }
+    console.log('BODY', body)
+
+    axios.post('https://bank-api-integrations.herokuapp.com/api/v1/external/payment', body, {
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
+        'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token'
+      }
+    }
+    ).then(response => console.log(response))
   }
   makeProductDetail() {
     let index = 1
@@ -80,7 +124,7 @@ class Review extends Component {
     ).then(response => {
       console.log('RESPONSE', response)
       for (var i = 0; i < this.state.cartProductsList.length; i++) {
-        this.updateStock(this.state.cartProductsList[i])      
+        this.updateStock(this.state.cartProductsList[i])
       }
       this.finishSale()
     })
@@ -162,27 +206,27 @@ class Review extends Component {
             ))}
           </Grid> */}
 
-        <Typography variant="h6" gutterBottom className={classes.title}>
-            Detalles de Pago
+            <Typography variant="h6" gutterBottom className={classes.title}>
+              Detalles de Pago
           </Typography>
-          <Grid container spacing={2}>
+            <Grid container spacing={2}>
               <React.Fragment >
                 <Grid item item xs={12} sm={12}>
                   <Typography gutterBottom>Metodo de Pago: {this.state.paymentForm.paymentMethod}</Typography>
-                  
-                  { this.state.paymentForm.paymentMethod === 'Debito' && 
-                    <Typography gutterBottom>CBU: {this.state.paymentForm.cbu}</Typography> }
 
-                  { this.state.paymentForm.paymentMethod === 'Credito' && 
+                  {this.state.paymentForm.paymentMethod === 'Debito' &&
+                    <Typography gutterBottom>CBU: {this.state.paymentForm.cbu}</Typography>}
+
+                  {this.state.paymentForm.paymentMethod === 'Credito' &&
                     <Typography gutterBottom>Nro Tarjeta: {this.state.paymentForm.cardNumber}</Typography>}
-                    
-                  { this.state.paymentForm.paymentMethod === 'Credito' && 
+
+                  {this.state.paymentForm.paymentMethod === 'Credito' &&
                     <Typography gutterBottom>Cuotas: {this.state.paymentForm.pays}</Typography>}
 
                 </Grid>
               </React.Fragment>
-            
-          </Grid>
+
+            </Grid>
 
           </Grid>
 
@@ -203,7 +247,7 @@ class Review extends Component {
                 fullWidth
                 variant="contained"
                 color="primary"
-                onClick={() => { this.createSale() }}
+                onClick={() => { this.confirm() }}
 
               >
                 Confirmar Orden

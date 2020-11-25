@@ -60,42 +60,6 @@ class CartModal extends Component {
         })
         return productDetail
     }
-    createClient() {
-        let body = {
-            "id": uuidv4(),
-            "userDni": this.state.user.id,
-            "productDetails": {
-                "additionalProp1": {
-                    "product": {
-                        "id": "string",
-                        "productName": "string",
-                        "description": "string",
-                        "brand": "string",
-                        "category": "string",
-                        "weight": "string",
-                        "price": 0,
-                        "pictureUrl": "string",
-                        "discountRate": 0,
-                        "stock": 0,
-                        "technicalSpecifications": {
-                            "additionalProp1": "string",
-                            "additionalProp2": "string",
-                            "additionalProp3": "string"
-                        }
-                    },
-                    "selectedAmount": 0
-                }
-            }
-        }
-        axios.post('https://market-api-uade.herokuapp.com/api/v1/ShoppingCar/create', {
-            headers: {
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
-                'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token'
-            }
-        }
-        ).then(response => console.log(response.data))
-    }
     render() {
         return (
             <Container component="main" maxWidth="xs">

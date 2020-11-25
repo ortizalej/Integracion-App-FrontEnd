@@ -11,7 +11,10 @@ import axios from 'axios';
 import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-
+import Modal from '@material-ui/core/Modal';
+import Fade from '@material-ui/core/Fade';
+import Backdrop from '@material-ui/core/Backdrop';
+import SalesFrom from '../Forms/SalesForm'
 const classes = theme => ({
     seeMore: {
         marginTop: theme.spacing(3),
@@ -20,15 +23,27 @@ const classes = theme => ({
         fontWeight: 'bold',
     },
     detail: {
-        color:'blue',
-    }
+        color: 'blue',
+    },
+    modal: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        position: 'absolute',
+        top: '10%',
+        left: '10%',
+        overflow: 'scroll',
+        height: '100%',
+        display: 'grid'
+    },
 });
 class SalesABM extends Component {
     constructor(props) {
         super(props);
         this.state = {
             masterOrders: [],
-            init: true
+            init: true,
+            open: false,
+            selectedRow: null
         };
     }
     deliverOrder(row) {
@@ -87,6 +102,20 @@ class SalesABM extends Component {
             })
         })
     }
+    handleOpen = (row, action) => {
+        this.state.selectedEmployee = row;
+
+        this.setState({
+            open: true,
+            selectedRow: row,
+
+        })
+    };
+    handleClose = (row) => {
+        this.setState({
+            open: false,
+        })
+    };
     render() {
         const { classes } = this.props;
         if (this.state.init) {
@@ -110,20 +139,25 @@ class SalesABM extends Component {
                         {this.state.masterOrders.map((row) => (
                             <TableRow key={row.id}>
                                 <TableCell>{row.id}</TableCell>
-                                <TableCell className={classes.detail}>Ver</TableCell>
+                                <TableCell
+                                    className={classes.detail}
+                                    onClick={() => { this.handleOpen(row) }}
+                                >
+                                    Ver
+                                 </TableCell>
                                 <TableCell>{row.total}</TableCell>
                                 <TableCell>
-                                            <TextField
-                                                required
-                                                id="trans"
-                                                name="Transaccion"
-                                                label="Nro Transaccion"
-                                                fullWidth
-                                                autoComplete="given-name"
-                                                //value=""{this.state.name}""
-                                                //onChange={this.handleChange}
-                                                noValidate
-                                            /></TableCell>
+                                    <TextField
+                                        required
+                                        id="trans"
+                                        name="Transaccion"
+                                        label="Nro Transaccion"
+                                        fullWidth
+                                        autoComplete="given-name"
+                                        //value=""{this.state.name}""
+                                        //onChange={this.handleChange}
+                                        noValidate
+                                    /></TableCell>
                                 <TableCell>
                                     <Checkbox
                                         checked={row.delivered}
@@ -145,7 +179,24 @@ class SalesABM extends Component {
                         ))}
                     </TableBody>
                 </Table>
-
+                <Modal
+                    aria-labelledby="transition-modal-title"
+                    aria-describedby="transition-modal-description"
+                    className={classes.modal}
+                    open={this.state.open}
+                    onClose={() => { this.handleClose() }}
+                    closeAfterTransition
+                    BackdropComponent={Backdrop}
+                    BackdropProps={{
+                        timeout: 500,
+                    }}
+                >
+                    <Fade in={this.state.open}>
+                        <div className={classes.paper}>
+                        <SalesFrom row={this.state.selectedRow}/>
+                        </div>
+                    </Fade>
+                </Modal>
             </React.Fragment>
         )
     }
