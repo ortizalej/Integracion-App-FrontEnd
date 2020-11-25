@@ -36,7 +36,7 @@ class ProductEditor extends Component {
                         <TableRow>
                             <TableCell></TableCell>
                             <TableCell style={{fontWeight: 'bold'}}>Producto</TableCell>
-                            <TableCell style={{fontWeight: 'bold'}}>Descripcion</TableCell>
+                            <TableCell style={{fontWeight: 'bold'}}>Descripción</TableCell>
                             <TableCell style={{fontWeight: 'bold'}}>Precio</TableCell>
                             <TableCell ></TableCell>
                         </TableRow>

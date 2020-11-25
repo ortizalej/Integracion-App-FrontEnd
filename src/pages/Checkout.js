@@ -135,7 +135,7 @@ class Checkout extends Component {
     this.setState({ activeStep: this.state.activeStep - 1 })
   };
   render() {
-    const steps = ['Datos de envio', 'Metodo de Pago', 'Verifica tu orden'];
+    const steps = ['Datos de envío', 'Método de Pago', 'Verificá tu orden'];
 
     const { classes } = this.props;
     return (
@@ -151,7 +151,7 @@ class Checkout extends Component {
         <main className={classes.layout}>
           <Paper className={classes.paper}>
             <Typography component="h1" variant="h4" align="center">
-              Datos de envio
+              Datos de envío
           </Typography>
             <Stepper activeStep={this.state.activeStep} className={classes.stepper}>
               {steps.map((label) => (

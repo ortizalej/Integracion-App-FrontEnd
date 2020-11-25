@@ -59,8 +59,8 @@ export default function FacturationTabs() {
     <div className={classes.root}>
       <AppBar position="static">
         <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
-          <Tab label="Facturacion del dia" {...a11yProps(0)} />
-          <Tab label="Facturaciones medio de pago" {...a11yProps(1)} />
+          <Tab label="Facturación del dia" {...a11yProps(0)} />
+          <Tab label="Facturación por medio" {...a11yProps(1)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>

@@ -151,7 +151,7 @@ export default function SignUp() {
             required
             fullWidth
             name="Correo Electronico"
-            label="Correo Electronico"
+            label="Correo Electrónico"
             type="text"
             id="emailAddress"
           />
@@ -173,7 +173,7 @@ export default function SignUp() {
             required
             fullWidth
             name="Direccion"
-            label="Direccion"
+            label="Dirección"
             type="text"
             id="address"
           />
@@ -183,7 +183,7 @@ export default function SignUp() {
             required
             fullWidth
             name="Phone"
-            label="Phone"
+            label="Teléfono"
             type="phone"
             id="phone"
           />

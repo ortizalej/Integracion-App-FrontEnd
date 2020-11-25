@@ -42,7 +42,7 @@ export const adminListItems = (
         <ListItemIcon>
           <LayersIcon />
         </ListItemIcon>
-        <ListItemText primary="Facturacion" />
+        <ListItemText primary="Facturación" />
       </ListItem>
     </Link>
     <Link to={{ pathname: '/ordenes-de-compra' }} style={{ textDecoration: 'none', color: 'black' }}>
@@ -50,7 +50,7 @@ export const adminListItems = (
         <ListItemIcon>
           <DashboardIcon />
         </ListItemIcon>
-        <ListItemText primary="Ordenes de compra" />
+        <ListItemText primary="Órdenes de compra" />
       </ListItem>
     </Link>
   </div>

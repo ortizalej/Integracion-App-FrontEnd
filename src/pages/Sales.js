@@ -163,7 +163,7 @@ class Sales extends Component {
               <MenuIcon />
             </IconButton>
             <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-              Administrador de Ordenes
+              Administrador de Órdenes
           </Typography>
             <Link>
               <Button
@@ -173,7 +173,7 @@ class Sales extends Component {
                 className={classes.submit}
                 onClick={() => { window.location.href = '/sign-in' }}
               >
-                Cerrar Sesion
+                Cerrar Sesión
               </Button>
             </Link>
           </Toolbar>

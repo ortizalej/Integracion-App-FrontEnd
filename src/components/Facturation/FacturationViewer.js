@@ -90,13 +90,13 @@ class FacturacionViewer extends Component {
           <p></p>
         }
 
-        <Title>Ordenes de venta</Title>
+        <Title>Órdenes de venta</Title>
         <Table size="small">
           <TableHead>
             <TableRow>
               <TableCell>Fecha</TableCell>
-              <TableCell>Numero de Venta</TableCell>
-              <TableCell>Metodo de Pago</TableCell>
+              <TableCell>Número de Venta</TableCell>
+              <TableCell>Método de Pago</TableCell>
               <TableCell>Total</TableCell>
             </TableRow>
           </TableHead>

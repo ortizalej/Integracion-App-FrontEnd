@@ -46,7 +46,7 @@ class CreditForm extends Component {
                     <Grid item xs={12} md={6}>
                         <TextField 
                             required id="cardNumber" 
-                            label="Numero de la tarjeta" 
+                            label="Número de la tarjeta" 
                             fullWidth 
                             autoComplete="cc-name"
                             value={this.state.cardNumber}

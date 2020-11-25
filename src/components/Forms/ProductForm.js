@@ -180,7 +180,7 @@ class ProductForm extends Component {
               required
               fullWidth
               name="Descripcion"
-              label="Descripcion"
+              label="Descripción"
               type="text"
               id="description"
               value={this.state.description}
