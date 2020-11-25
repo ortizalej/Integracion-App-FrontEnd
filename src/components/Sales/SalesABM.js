@@ -14,7 +14,7 @@ import TextField from '@material-ui/core/TextField';
 import Modal from '@material-ui/core/Modal';
 import Fade from '@material-ui/core/Fade';
 import Backdrop from '@material-ui/core/Backdrop';
-import SalesFrom from '../Forms/SalesForm'
+import SalesForm from '../Forms/SalesForm'
 const classes = theme => ({
     seeMore: {
         marginTop: theme.spacing(3),
@@ -24,6 +24,16 @@ const classes = theme => ({
     },
     detail: {
         color: 'blue',
+    },
+    root: {
+        flexGrow: 1,
+        minWidth: 300,
+        transform: 'translateZ(0)',
+        // The position fixed scoping doesn't work in IE 11.
+        // Disable this demo to preserve the others.
+        '@media all and (-ms-high-contrast: none)': {
+            display: 'none',
+        },
     },
     modal: {
         alignItems: 'center',
@@ -35,6 +45,13 @@ const classes = theme => ({
         height: '100%',
         display: 'grid'
     },
+    paper: {
+        width: 400,
+        backgroundColor: theme.palette.background.paper,
+        border: '2px solid #000',
+        boxShadow: theme.shadows[5],
+        padding: theme.spacing(2, 4, 3),
+    }
 });
 class SalesABM extends Component {
     constructor(props) {
@@ -59,21 +76,15 @@ class SalesABM extends Component {
         })
 
     }
+    getRandomArbitrary(min, max) {
+        return Math.random() * (max - min) + min;
+    }
     updateDeliver(row) {
-        let body = {
-            "id": row.id,
-            "shoppingCarId": row.shoppingCarId,
-            "date": row.date,
-            "total": parseInt(row.total),
-            "totalWithDiscount": parseInt(row.totalWithDiscount),
-            "userDni": row.userDni,
-            "paymentMethod": row.paymentMethod,
-            "productDetails": row.productDetails,
-            "delivered": true
-        }
+        row.delivered = true
+        row.paymentId = parseInt(this.getRandomArbitrary(1, 100000000)).toString()
         const auth = btoa('admin:123');
 
-        axios.put('https://market-api-uade.herokuapp.com/api/v1/Sales/update?id=' + body.id, body, {
+        axios.put('https://market-api-uade.herokuapp.com/api/v1/Sales/update?id=' + row.id, row, {
             headers: {
                 'Access-Control-Allow-Origin': '*',
                 'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
@@ -82,7 +93,7 @@ class SalesABM extends Component {
 
             }
         }
-        ).then(response => { this.deliverOrder(body) })
+        ).then(response => { this.deliverOrder(row) })
     }
     getOrders() {
         var auth = btoa('admin:123');
@@ -129,6 +140,7 @@ class SalesABM extends Component {
                         <TableRow>
                             <TableCell className={classes.title}>Numero de Orden</TableCell>
                             <TableCell className={classes.title}>Detalle</TableCell>
+                            <TableCell className={classes.title}>Metodo Pago</TableCell>
                             <TableCell className={classes.title}>Precio Total</TableCell>
                             <TableCell className={classes.title}>Transaccion</TableCell>
                             <TableCell className={classes.title}>Entregado</TableCell>
@@ -145,6 +157,8 @@ class SalesABM extends Component {
                                 >
                                     Ver
                                  </TableCell>
+                                 <TableCell>{row.paymentMethod}</TableCell>
+
                                 <TableCell>{row.total}</TableCell>
                                 <TableCell>
                                     <TextField
@@ -153,8 +167,9 @@ class SalesABM extends Component {
                                         name="Transaccion"
                                         label="Nro Transaccion"
                                         fullWidth
+                                        disabled
                                         autoComplete="given-name"
-                                        //value=""{this.state.name}""
+                                        value={row.paymentId}
                                         //onChange={this.handleChange}
                                         noValidate
                                     /></TableCell>
@@ -193,7 +208,7 @@ class SalesABM extends Component {
                 >
                     <Fade in={this.state.open}>
                         <div className={classes.paper}>
-                        <SalesFrom row={this.state.selectedRow}/>
+                            <SalesForm row={this.state.selectedRow} />
                         </div>
                     </Fade>
                 </Modal>

@@ -34,20 +34,23 @@ class Review extends Component {
       paymentForm: this.props.paymentForm,
       totalPrice: 0,
       totalWithDiscount: 0,
-
-
     };
+  }
+  getRandomArbitrary(min, max) {
+    return Math.random() * (max - min) + min;
   }
   confirm() {
     if (this.state.paymentForm.paymentMethod == "Credito") {
       this.sendCard();
     } else if (this.state.paymentForm.paymentMethod == "Debito") {
       this.sendBank();
+    } else if (this.state.paymentForm.paymentMethod == "Efectivo") {
+      this.createSale("")
     }
   }
   sendCard(body) {
     body = {
-      "amount": this.state.paymentForm.totalPrice,
+      "amount": this.state.totalPrice,
       "creditNumber": this.state.paymentForm.cardNumber,
       "monthPays": this.state.paymentForm.pays,
       "productWithDiscount": false,
@@ -56,13 +59,7 @@ class Review extends Component {
     }
     console.log('BODY', body)
 
-    axios.post('https://uade-financial-entity.herokuapp.com/financial_entity/api/purchase', body, {
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
-        'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token'
-      }
-    }
+    axios.post('https://uade-financial-entity.herokuapp.com/financial_entity/api/purchase', body
     ).then(response => console.log(response))
   }
   sendBank() {
@@ -75,18 +72,11 @@ class Review extends Component {
     console.log('BODY', body)
 
     axios.post('https://bank-api-integrations.herokuapp.com/api/v1/external/payment', body)
-      .then(response => console.log(response))
+      .then(response => {
+        console.log(response.data.destination_reference_number)
+        this.createSale(response.data.destination_reference_number)
+      })
   }
-  makeProductDetail() {
-    let index = 1
-    let productDetail = {}
-    this.state.cartProducts.forEach((values, keys) => {
-      productDetail['additionalProp' + index] = values.selectedAmount
-      index++;
-    })
-    return productDetail
-  }
-
   goBack() {
     this.props.goBack()
   }
@@ -94,19 +84,27 @@ class Review extends Component {
     this.props.finishSale()
   }
 
-  createSale() {
-    let productDetails = this.makeProductDetail()
+  getQuantity() {
+    let productsWithQuantity = this.state.cartProductsList;
+    for (let i = 0; i < productsWithQuantity.length; i++) {
+      productsWithQuantity[i].quantity =  this.props.cartProducts.get(productsWithQuantity[i]).selectedAmount;
+    }
+    return productsWithQuantity
+  }
+
+  createSale(paymentId) {
     let body = {
       "id": uuidv4(),
-      "shoppingCarId": "string",
+      "shoppingCarDetail": JSON.stringify(this.getQuantity()),
       "total": this.state.totalPrice,
       "totalWithDiscount": this.state.totalWithDiscount,
       "userDni": "string",
       "paymentMethod": this.state.paymentForm.paymentMethod,
-      "productDetails": productDetails,
-      "delivered": false
+      "delivered": false,
+      "paymentId": paymentId.toString(),
+      "date": "2020-11-25T22:01:28.035Z"
     }
-
+    console.log(body)
     var auth = btoa('admin:123');
     axios.post('https://market-api-uade.herokuapp.com/api/v1/Sales/create', body, {
       headers: {

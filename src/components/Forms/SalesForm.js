@@ -16,13 +16,13 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 
+
 const classes = theme => ({
     paper: {
         marginTop: theme.spacing(8),
-        display: 'flex', 
+        display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'center'
     },
     avatar: {
         margin: theme.spacing(1),
@@ -36,8 +36,6 @@ const classes = theme => ({
         margin: theme.spacing(3, 0, 2),
     },
 });
-
-
 
 class SalesForm extends Component {
     constructor(props) {
@@ -65,30 +63,16 @@ class SalesForm extends Component {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {this.props.row.map((row) => (
+                            {JSON.parse(this.props.row.shoppingCarDetail).map((row) => (
                                 <TableRow key={row.id}>
                                     <TableCell>{row.productName}</TableCell>
                                     <TableCell>{row.price}</TableCell>
-                                    <TableCell>{this.state.cartProducts.get(row).selectedAmount}</TableCell>
+                                    <TableCell>{row.quantity}</TableCell>
 
                                 </TableRow>
                             ))}
                         </TableBody>
                     </Table>
-                    <Button
-                        fullWidth
-                        variant="contained"
-                        color="primary"
-                        className={classes.submit}
-                        onClick={() => {
-                            this.props.history.push({
-                                pathname: '/checkout',
-                                state: { cartProducts: this.state.cartProducts, user: this.props.user }
-                            })
-                        }}
-                    >
-                        Confirmar
-              </Button>
                 </div>
                 <Box mt={8}>
                 </Box>
