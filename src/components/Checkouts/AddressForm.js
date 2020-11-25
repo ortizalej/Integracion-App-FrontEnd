@@ -36,92 +36,101 @@ class AddressForm extends Component {
       province: null,
       zipcode: null,
       paymentMethod: null,
+      DNI: null,
       errors: {
         name: '',
-        lastName:'',
+        lastName: '',
         zipcode: '',
-        address:'',
-        address2:'',
-        city:'',
-        province:'',
-        
+        address: '',
+        address2: '',
+        city: '',
+        province: '',
+
       }
     };
   }
 
-  
+
 
   handleChange = (event) => {
     event.preventDefault();
     const { name, value } = event.target;
     let errors = this.state.errors;
-
     switch (name) {
-      case 'Nombre': 
-        errors.name = 
+      case 'Nombre':
+        errors.name =
           value.length < 1
             ? 'El nombre no puede estar vacío.'
             : '';
-            this.setState({
-              name: event.target.value
-            })
+        this.setState({
+          name: event.target.value
+        })
         break;
-      
-      case 'Apellido': 
-        errors.lastName = 
-          value.length < 1 
+
+      case 'Apellido':
+        errors.lastName =
+          value.length < 1
             ? 'El Apellido no puede estar vacío.'
             : '';
-            this.setState({
-              lastName: event.target.value
-            })
+        this.setState({
+          lastName: event.target.value
+        })
         break;
-        case 'Calle': 
-        errors.address = 
-          value.length < 1 
+      case 'DNI':
+        errors.lastName =
+          value.length < 1
+            ? 'El DNI no puede estar vacío.'
+            : '';
+        this.setState({
+          DNI: event.target.value
+        })
+        break;
+      case 'Calle':
+        errors.address =
+          value.length < 1
             ? 'La Calle no puede estar vacía.'
             : '';
-            this.setState({
-              address: event.target.value
-            })
+        this.setState({
+          address: event.target.value
+        })
         break;
-        case 'PisoDepto': 
-            this.setState({
-              address2: event.target.value
-            })
+      case 'PisoDepto':
+        this.setState({
+          address2: event.target.value
+        })
         break;
-        case 'Ciudad': 
-        errors.city = 
-          value.length < 1 
+      case 'Ciudad':
+        errors.city =
+          value.length < 1
             ? 'La Ciudad no puede estar vacía.'
             : '';
-            this.setState({
-              city: event.target.value
-            })
+        this.setState({
+          city: event.target.value
+        })
         break;
-        case 'Provincia': 
-        errors.province = 
-          value.length < 1 
+      case 'Provincia':
+        errors.province =
+          value.length < 1
             ? 'La Provincia no puede estar vacía.'
             : '';
-            this.setState({
-              province: event.target.value
-            })
+        this.setState({
+          province: event.target.value
+        })
         break;
-        case 'Codigo Postal': 
-        errors.zipcode = 
-        validCPRegex.test(value) 
+      case 'Codigo Postal':
+        errors.zipcode =
+          validCPRegex.test(value)
             ? ''
             : 'El Código Postal no es válido.';
-            this.setState({
-              zipCode: event.target.value
-            })
+        this.setState({
+          zipCode: event.target.value
+        })
         break;
       default:
         break;
     }
 
-    this.setState({errors, [name]: value});
+    this.setState({ errors, [name]: value });
   }
 
   /*handleChangeName = (event) => {
@@ -173,16 +182,17 @@ class AddressForm extends Component {
       city: this.state.city,
       province: this.state.province,
       zipcode: this.state.zipcode,
+      DNI: this.state.DNI
       //paymentMethod: this.state.paymentMethod
     }
 
-    if(validateForm(this.state.errors)) {
+    if (validateForm(this.state.errors)) {
       console.info('Valid Form')
       this.props.updateAddress(addressForm)
-    }else{
+    } else {
       console.error('Invalid Form')
     }
-   
+
   }
   render() {
     console.log('rerender')
@@ -205,7 +215,7 @@ class AddressForm extends Component {
                 onChange={this.handleChange}
                 noValidate
               />
-              {this.state.errors.name.length > 0 && 
+              {this.state.errors.name.length > 0 &&
                 <span className='error'>{this.state.errors.name}</span>}
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -220,9 +230,24 @@ class AddressForm extends Component {
                 onChange={this.handleChange}
                 noValidate
               />
-              {this.state.errors.lastName.length > 0 && 
+              {this.state.errors.lastName.length > 0 &&
                 <span className='error'>{this.state.errors.lastName}</span>}
             </Grid>
+            <Grid item xs={12}>
+
+              <TextField
+                required
+                id="DNI"
+                name="DNI"
+                label="DNI"
+                fullWidth
+                autoComplete="given-name"
+                value={this.state.DNI}
+                onChange={this.handleChange}
+                noValidate
+              />
+            </Grid>
+
             <Grid item xs={12}>
               <TextField
                 required
@@ -235,7 +260,7 @@ class AddressForm extends Component {
                 onChange={this.handleChange}
                 noValidate
               />
-              {this.state.errors.address.length > 0 && 
+              {this.state.errors.address.length > 0 &&
                 <span className='error'>{this.state.errors.address}</span>}
             </Grid>
             <Grid item xs={12}>
@@ -249,7 +274,7 @@ class AddressForm extends Component {
                 onChange={this.handleChange}
                 noValidate
               />
-              {this.state.errors.address2.length > 0 && 
+              {this.state.errors.address2.length > 0 &&
                 <span className='error'>{this.state.errors.address2}</span>}
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -264,7 +289,7 @@ class AddressForm extends Component {
                 onChange={this.handleChange}
                 noValidate
               />
-              {this.state.errors.city.length > 0 && 
+              {this.state.errors.city.length > 0 &&
                 <span className='error'>{this.state.errors.city}</span>}
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -277,7 +302,7 @@ class AddressForm extends Component {
                 onChange={this.handleChange}
                 noValidate
               />
-              {this.state.errors.province.length > 0 && 
+              {this.state.errors.province.length > 0 &&
                 <span className='error'>{this.state.errors.province}</span>}
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -292,7 +317,7 @@ class AddressForm extends Component {
                 onChange={this.handleChange}
                 noValidate
               />
-              {this.state.errors.zipcode.length > 0 && 
+              {this.state.errors.zipcode.length > 0 &&
                 <span className='error'>{this.state.errors.zipcode}</span>}
             </Grid>
             <Grid container spacing={3}>

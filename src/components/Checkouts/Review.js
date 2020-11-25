@@ -58,9 +58,13 @@ class Review extends Component {
       "shopName": "Super A"
     }
     console.log('BODY', body)
+    let proxy = 'https://cors-sipi.herokuapp.com/';
 
-    axios.post('https://uade-financial-entity.herokuapp.com/financial_entity/api/purchase', body
-    ).then(response => console.log(response))
+    axios.post(proxy + 'https://uade-financial-entity.herokuapp.com/financial_entity/api/purchase', body
+    ).then(response => {
+      console.log(response)
+      this.createSale(response.data.id)
+    }).catch(error => alert("Error al generar el pago"))
   }
   sendBank() {
     let body = {
@@ -75,7 +79,7 @@ class Review extends Component {
       .then(response => {
         console.log(response.data.destination_reference_number)
         this.createSale(response.data.destination_reference_number)
-      })
+      }).catch(error => alert("Error al generar el pago"))
   }
   goBack() {
     this.props.goBack()
@@ -87,7 +91,7 @@ class Review extends Component {
   getQuantity() {
     let productsWithQuantity = this.state.cartProductsList;
     for (let i = 0; i < productsWithQuantity.length; i++) {
-      productsWithQuantity[i].quantity =  this.props.cartProducts.get(productsWithQuantity[i]).selectedAmount;
+      productsWithQuantity[i].quantity = this.props.cartProducts.get(productsWithQuantity[i]).selectedAmount;
     }
     return productsWithQuantity
   }
@@ -98,7 +102,7 @@ class Review extends Component {
       "shoppingCarDetail": JSON.stringify(this.getQuantity()),
       "total": this.state.totalPrice,
       "totalWithDiscount": this.state.totalWithDiscount,
-      "userDni": "string",
+      "userDni": this.state.addressForm.DNI,
       "paymentMethod": this.state.paymentForm.paymentMethod,
       "delivered": false,
       "paymentId": paymentId.toString(),

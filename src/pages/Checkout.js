@@ -120,6 +120,7 @@ class Checkout extends Component {
           addressForm={this.state.addressForm}
           paymentForm={this.state.paymentForm}
           goBack={this.goBack.bind(this)}
+          user={this.props.user}
           finishSale={this.finishSale.bind(this)}
         />;
       default:

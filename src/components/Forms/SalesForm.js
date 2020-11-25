@@ -52,8 +52,11 @@ class SalesForm extends Component {
                 <CssBaseline />
                 <div className={classes.paper}>
                     <Typography component="h1" variant="h5">
+                        DNI Cliente: {this.props.row.userDni}
+                    </Typography>
+                    <Typography component="h1" variant="h5">
                         Productos
-            </Typography>
+                    </Typography>
                     <Table size="small">
                         <TableHead>
                             <TableRow>
