@@ -74,14 +74,8 @@ class Review extends Component {
     }
     console.log('BODY', body)
 
-    axios.post('https://bank-api-integrations.herokuapp.com/api/v1/external/payment', body, {
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
-        'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token'
-      }
-    }
-    ).then(response => console.log(response))
+    axios.post('https://bank-api-integrations.herokuapp.com/api/v1/external/payment', body)
+      .then(response => console.log(response))
   }
   makeProductDetail() {
     let index = 1
