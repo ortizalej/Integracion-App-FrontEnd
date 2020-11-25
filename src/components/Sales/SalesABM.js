@@ -81,7 +81,9 @@ class SalesABM extends Component {
     }
     updateDeliver(row) {
         row.delivered = true
-        row.paymentId = parseInt(this.getRandomArbitrary(1, 100000000)).toString()
+        if (row.paymentMethod == "Efectivo") {
+            row.paymentId = parseInt(this.getRandomArbitrary(1, 100000000)).toString()
+        }
         const auth = btoa('admin:123');
 
         axios.put('https://market-api-uade.herokuapp.com/api/v1/Sales/update?id=' + row.id, row, {
@@ -157,7 +159,7 @@ class SalesABM extends Component {
                                 >
                                     Ver
                                  </TableCell>
-                                 <TableCell>{row.paymentMethod}</TableCell>
+                                <TableCell>{row.paymentMethod}</TableCell>
 
                                 <TableCell>{row.total}</TableCell>
                                 <TableCell>
