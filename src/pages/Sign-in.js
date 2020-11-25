@@ -92,9 +92,8 @@ class SignIn extends Component {
         ).then(response => {
           resp = response.data;
           this.SignInRedirect(response.data, emailAddress, password)
-          if (resp != undefined) {
+          if (resp === undefined) {
             console.log("El usuario no existe.");
-            alert("Usuario o contraseña incorrecto.");
           }
           
         })
