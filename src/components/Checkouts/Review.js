@@ -181,10 +181,10 @@ class Review extends Component {
           <Grid item xs={12} sm={6}>
 
             <Typography variant="h6" gutterBottom className={classes.title}>
-              Datos de envio
+              Datos de envío
           </Typography>
             <Typography gutterBottom>Nombre: {this.state.addressForm.name} {this.state.addressForm.lastName}</Typography>
-            <Typography gutterBottom>Direccion: {[this.state.addressForm.address, this.state.addressForm.address2].join(', ')}</Typography>
+            <Typography gutterBottom>Dirección: {[this.state.addressForm.address, this.state.addressForm.address2].join(', ')}</Typography>
           </Grid>
           <Grid item container direction="column" xs={12} sm={6}>
             {/* <Typography variant="h6" gutterBottom className={classes.title}>
@@ -209,7 +209,7 @@ class Review extends Component {
             <Grid container spacing={2}>
               <React.Fragment >
                 <Grid item item xs={12} sm={12}>
-                  <Typography gutterBottom>Metodo de Pago: {this.state.paymentForm.paymentMethod}</Typography>
+                  <Typography gutterBottom>Método de Pago: {this.state.paymentForm.paymentMethod}</Typography>
 
                   {this.state.paymentForm.paymentMethod === 'Debito' &&
                     <Typography gutterBottom>CBU: {this.state.paymentForm.cbu}</Typography>}

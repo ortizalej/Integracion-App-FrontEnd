@@ -178,7 +178,7 @@ class Users extends Component {
                 className={classes.submit}
                 onClick={() => { window.location.href = '/sign-in' }}
               >
-                Cerrar Sesion
+                Cerrar Sesión
               </Button>
             </Link>
           </Toolbar>

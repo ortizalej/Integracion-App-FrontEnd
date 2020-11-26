@@ -200,7 +200,7 @@ class AddressForm extends Component {
       (
         <React.Fragment>
           <Typography variant="h6" gutterBottom>
-            Datos de envio
+            Datos de envío
           </Typography>
           <Grid container spacing={3}>
             <Grid item xs={12} sm={6}>

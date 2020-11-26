@@ -113,7 +113,7 @@ class Header extends Component {
               <div>
 
                 <Link to={{ pathname: '/sign-in' }} style={{ textDecoration: 'none', color: 'white' }}>
-                  <Button color="inherit">Cerrar Sesion</Button>
+                  <Button color="inherit">Cerrar SesiÓn</Button>
                 </Link>
                 <IconButton aria-label="cart" onClick={this.handleOpen}>
                   <StyledBadge badgeContent={this.state.cartProducts.size} color="secondary">

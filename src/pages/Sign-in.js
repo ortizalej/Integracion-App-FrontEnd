@@ -129,7 +129,7 @@ class SignIn extends Component {
               required
               fullWidth
               id="email"
-              label="Correo Electronico"
+              label="Correo Electrónico"
               name="Correo Electronico"
               autoComplete="email"
               autoFocus

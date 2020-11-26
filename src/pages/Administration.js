@@ -141,7 +141,7 @@ export default function Dashboard() {
             <MenuIcon />
           </IconButton>
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-            Ordenes de venta
+            Órdenes de venta
           </Typography>
           <Link>
             <Button
@@ -151,7 +151,7 @@ export default function Dashboard() {
               className={classes.submit}
               onClick={() => { window.location.href = '/sign-in' }}
             >
-              Cerrar Sesion
+              Cerrar Sesión
               </Button>
           </Link>
         </Toolbar>

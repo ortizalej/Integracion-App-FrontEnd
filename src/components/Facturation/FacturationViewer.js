@@ -90,13 +90,14 @@ class FacturacionViewer extends Component {
           <p></p>
         }
 
-        <Title>Ordenes de venta</Title>
+        <Title>Órdenes de venta</Title>
         <Table size="small">
           <TableHead>
             <TableRow>
               <TableCell>Fecha</TableCell>
-              <TableCell>Numero de Venta</TableCell>
-              <TableCell>Metodo de Pago</TableCell>
+              <TableCell>Número de Venta</TableCell>
+              <TableCell>Número de Transaccion</TableCell>
+              <TableCell>Método de Pago</TableCell>
               <TableCell>Total</TableCell>
             </TableRow>
           </TableHead>
@@ -105,6 +106,7 @@ class FacturacionViewer extends Component {
               <TableRow key={row.id}>
                 <TableCell>{row.date}</TableCell>
                 <TableCell>{row.id}</TableCell>
+                <TableCell>{row.paymentId}</TableCell>
                 <TableCell>{row.paymentMethod}</TableCell>
                 <TableCell>{row.total}</TableCell>
               </TableRow>

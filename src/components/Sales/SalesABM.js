@@ -81,7 +81,9 @@ class SalesABM extends Component {
     }
     updateDeliver(row) {
         row.delivered = true
-        row.paymentId = parseInt(this.getRandomArbitrary(1, 100000000)).toString()
+        if (row.paymentMethod == "Efectivo") {
+            row.paymentId = parseInt(this.getRandomArbitrary(1, 100000000)).toString()
+        }
         const auth = btoa('admin:123');
 
         axios.put('https://market-api-uade.herokuapp.com/api/v1/Sales/update?id=' + row.id, row, {
@@ -134,15 +136,15 @@ class SalesABM extends Component {
         }
         return (
             <React.Fragment>
-                <Title>Ordenes</Title>
+                <Title>Órdenes</Title>
                 <Table size="small">
                     <TableHead>
                         <TableRow>
-                            <TableCell className={classes.title}>Numero de Orden</TableCell>
+                            <TableCell className={classes.title}>Número de Orden</TableCell>
                             <TableCell className={classes.title}>Detalle</TableCell>
-                            <TableCell className={classes.title}>Metodo Pago</TableCell>
+                            <TableCell className={classes.title}>Método Pago</TableCell>
                             <TableCell className={classes.title}>Precio Total</TableCell>
-                            <TableCell className={classes.title}>Transaccion</TableCell>
+                            <TableCell className={classes.title}>Transacción</TableCell>
                             <TableCell className={classes.title}>Entregado</TableCell>
                             <TableCell className={classes.title}></TableCell>
                         </TableRow>
@@ -157,7 +159,7 @@ class SalesABM extends Component {
                                 >
                                     Ver
                                  </TableCell>
-                                 <TableCell>{row.paymentMethod}</TableCell>
+                                <TableCell>{row.paymentMethod}</TableCell>
 
                                 <TableCell>{row.total}</TableCell>
                                 <TableCell>
@@ -165,7 +167,7 @@ class SalesABM extends Component {
                                         required
                                         id="trans"
                                         name="Transaccion"
-                                        label="Nro Transaccion"
+                                        label="Nro. Transacción"
                                         fullWidth
                                         disabled
                                         autoComplete="given-name"

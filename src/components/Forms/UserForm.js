@@ -297,7 +297,7 @@ class UserForm extends Component {
                             required
                             fullWidth
                             name="Correo Electronico"
-                            label="Correo Electronico"
+                            label="Correo Electrónico"
                             type="text"
                             id="Email"
                             value={this.state.email}
@@ -311,7 +311,7 @@ class UserForm extends Component {
                             required
                             fullWidth
                             name="Direccion"
-                            label="Direccion"
+                            label="Dirección"
                             type="text"
                             id="Address"
                             value={this.state.address}
@@ -339,7 +339,7 @@ class UserForm extends Component {
                             required
                             fullWidth
                             name="Phone"
-                            label="Phone"
+                            label="Teléfono"
                             type="phone"
                             id="Phone"
                             value={this.state.phone}
@@ -353,7 +353,7 @@ class UserForm extends Component {
                             required
                             fullWidth
                             name="Posicion"
-                            label="Posicion"
+                            label="Posición"
                             type="text"
                             id="possition"
                             value={this.state.position}
@@ -366,7 +366,7 @@ class UserForm extends Component {
                             required
                             fullWidth
                             name="Descripcion de posicion"
-                            label="Descripcion de posicion"
+                            label="Descripción de posición"
                             type="text"
                             id="possitionDescription"
                             value={this.state.positionDescription}
@@ -457,7 +457,7 @@ class UserForm extends Component {
                             required
                             fullWidth
                             name="Numero de hijos"
-                            label="Numero de hijos"
+                            label="Número de hijos"
                             type="number"
                             id="numberOfChildrens"
                             value={this.state.childrens}

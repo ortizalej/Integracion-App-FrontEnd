@@ -77,7 +77,7 @@ class PaymentForm extends Component {
 
         <React.Fragment>
           <Typography variant="h6" gutterBottom>
-            Metodo de Pago
+            Método de Pago
       </Typography>
           <Grid item xs={12} sm={6}>
             <Select
@@ -90,8 +90,8 @@ class PaymentForm extends Component {
             >
               <option aria-label="None" value="" > Medio de Pago</option>
               <option value={'Efectivo'}>Efectivo</option>
-              <option value={'Debito'}>Tarjeta Debito</option>
-              <option value={'Credito'}>Tarjeta Credito</option>
+              <option value={'Debito'}>Tarjeta Débito</option>
+              <option value={'Credito'}>Tarjeta Crédito</option>
             </Select>
 
           </Grid>
