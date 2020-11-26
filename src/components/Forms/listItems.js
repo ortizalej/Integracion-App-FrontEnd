@@ -50,7 +50,7 @@ export const adminListItems = (
         <ListItemIcon>
           <DashboardIcon />
         </ListItemIcon>
-        <ListItemText primary="Órdenes de compra" />
+        <ListItemText primary="Órdenes de venta" />
       </ListItem>
     </Link>
   </div>

@@ -55,9 +55,9 @@ class Orders extends Component {
             <TableRow>
               <TableCell>Fecha</TableCell>
               <TableCell>Número de Venta</TableCell>
+              <TableCell>Numero de transaccion</TableCell>
               <TableCell>Método de Pago</TableCell>
               <TableCell>Total</TableCell>
-              <TableCell>Total con descuento</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -65,9 +65,9 @@ class Orders extends Component {
               <TableRow key={row.id}>
                 <TableCell>{row.date}</TableCell>
                 <TableCell>{row.id}</TableCell>
+                <TableCell>{row.paymentId}</TableCell>
                 <TableCell>{row.paymentMethod}</TableCell>
                 <TableCell>{row.total}</TableCell>
-                <TableCell>{row.totalWithDiscount}</TableCell>
               </TableRow>
             ))}
           </TableBody>
