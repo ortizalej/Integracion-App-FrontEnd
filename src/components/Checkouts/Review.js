@@ -54,7 +54,7 @@ class Review extends Component {
       "creditNumber": this.state.paymentForm.cardNumber,
       "monthPays": this.state.paymentForm.pays,
       "productWithDiscount": false,
-      "secretCode": 611,
+      "secretCode": parseInt(this.state.paymentForm.cvv),
       "shopName": "Super A"
     }
     console.log('BODY', body)
