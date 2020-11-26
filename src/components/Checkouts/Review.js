@@ -70,7 +70,7 @@ class Review extends Component {
     let body = {
       "amount": this.state.totalPrice,
       "cbu": this.state.paymentForm.cbu,
-      "detail": "Testing",
+      "detail": "Pago a SuperEnCasa CBU: 4560001900000000000369",
       "provider_code": "042036"
     }
     console.log('BODY', body)
