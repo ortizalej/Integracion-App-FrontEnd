@@ -268,8 +268,8 @@ class UserForm extends Component {
                             margin="normal"
                             required
                             fullWidth
-                            name="Empleado"
-                            label="Empleado"
+                            name="Nombre"
+                            label="Nombre"
                             type="text"
                             id="UserName"
                             value={this.state.userName}
